@@ -2,7 +2,17 @@ from tkinter import *
 
 # Splash screen
 splash_root = Tk()
-splash_root.geometry("300x300")
+
+app_width = 500
+app_height = 500 
+
+screen_width = splash_root.winfo_screenwidth()
+screen_height = splash_root.winfo_screenheight()
+
+x = (screen_width / 2) - (app_width / 2)
+y = (screen_height / 2) - (app_height / 2)
+
+splash_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
 #Hide title bar
 splash_root.overrideredirect(True)
@@ -18,15 +28,21 @@ def main_window():
     root.title('Flashcard App')
 
     #Setting basic variables for fonts, and window sizing
-    default_geometry_x = 500
-    default_geometry_y = 400
+    app_width = 500
+    app_height = 500 
 
-    #Calling variables for window sizing
-    root.geometry("{width}x{height}".format(width=default_geometry_x, height=default_geometry_y))
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
     
 
 #Splash screen countdown
-splash_root.after(1000, main_window)
+splash_root.after(2000, main_window)
 
 mainloop()
 
