@@ -25,7 +25,7 @@ def open_mammals_lesson():
     mlesson_root = Tk()
     mlesson_root.title('Mammal Lesson')
 
-    app_width = 700
+    app_width = 1000
     app_height = 700 
 
     screen_width = mlesson_root.winfo_screenwidth()
@@ -36,23 +36,85 @@ def open_mammals_lesson():
 
     mlesson_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
+    #Back Button
+    back_button = Button(mlesson_root, text="Back", command=mlesson_root.destroy)
+    back_button.pack(side="top", anchor="nw")
+
+    mammal_lesson = Label(mlesson_root, text="I love mammal" )
+    mammal_lesson.pack()
+
+    mammal_quiz_button = Button(mlesson_root, text="Quiz", command=mammal_quiz)
+    mammal_quiz_button.pack()
+
 def open_birds_lesson():
-    pass
+    blesson_root = Tk()
+    blesson_root.title('Bird Lesson')
+
+    app_width = 1000
+    app_height = 700 
+
+    screen_width = blesson_root.winfo_screenwidth()
+    screen_height = blesson_root.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    blesson_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    #Back Button
+    back_button = Button(blesson_root, text="Back", command=blesson_root.destroy)
+    back_button.pack(side="top", anchor="nw")
+
+    bird_lesson = Label(blesson_root, text="I love bird" )
+    bird_lesson.pack()
+
+    bird_quiz_button = Button(blesson_root, text="Quiz", command=bird_quiz)
+    bird_quiz_button.pack()
 
 def open_fish_lesson():
+    flesson_root = Tk()
+    flesson_root.title('Fish Lesson')
+
+    app_width = 1000
+    app_height = 700 
+
+    screen_width = flesson_root.winfo_screenwidth()
+    screen_height = flesson_root.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    flesson_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    #Back Button
+    back_button = Button(flesson_root, text="Back", command=flesson_root.destroy)
+    back_button.pack(side="top", anchor="nw")
+
+    fish_lesson = Label(flesson_root, text="I love fish") 
+    fish_lesson.pack()
+
+    fish_quiz_button = Button(flesson_root, text="Quiz", command=fish_quiz)
+    fish_quiz_button.pack()
+
+def mammal_quiz():
     pass
 
+def bird_quiz():
+    pass
+
+def fish_quiz():
+    pass
 
 #Main program
 def main_window():
     splash_root.destroy()
 
     root = Tk()
-    root.title('All About Animals App')
+    root.title('All About Animals')
 
     #Setting basic variables for fonts, and window sizing
-    app_width = 900
-    app_height = 570 
+    app_width = 985
+    app_height = 670 
 
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
@@ -62,10 +124,8 @@ def main_window():
 
     root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
-    #image_path = PhotoImage(file=r"C:\Users\mdfar\Downloads\SDD Y12 Image folder\animals pic.jpg")
-    #bg_image = Label(root, image=image_path)
-    #bg_image.place(relheight=1, relwidth=1)
-    my_img = ImageTk.PhotoImage(Image.open("animals pic.png"))
+   
+    my_img = ImageTk.PhotoImage(Image.open("bgimg.png"))
     root.my_img = my_img
     bg_image = Label(image=my_img)
     bg_image.place(relheight=1, relwidth=1)
@@ -97,12 +157,6 @@ def main_window():
     fish_button = Button(root, text="Lesson on Fish", width=20, command=open_fish_lesson)
     fish_button.pack(pady=20)
 
-
-
-
-
-
- 
 
 #Splash screen countdown
 splash_root.after(2000, main_window)
