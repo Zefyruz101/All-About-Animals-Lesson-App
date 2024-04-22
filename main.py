@@ -25,7 +25,7 @@ def main_window():
     splash_root.destroy()
 
     root = Tk()
-    root.title('Flashcard App')
+    root.title('Animal Lesson App')
 
     #Setting basic variables for fonts, and window sizing
     app_width = 500
@@ -38,6 +38,11 @@ def main_window():
     y = (screen_height / 2) - (app_height / 2)
 
     root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    root.overrideredirect(True)
+
+    Program_title_label = Label(root, text="Click on a lesson to begin!")
+    Program_title_label.pack
 
     
 
