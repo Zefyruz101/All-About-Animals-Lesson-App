@@ -49,10 +49,9 @@ def main_window():
 
     root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
+    # Accessibility Menu
     menubar = Menu(root)
     root.config(menu=menubar)
-
-    # Accessibility Menu
     accessibility_menu = Menu(menubar, tearoff=False)
     menubar.add_cascade(label="Accessibility Settings", menu=accessibility_menu)
 
@@ -61,12 +60,13 @@ def main_window():
     accessibility_menu.add_cascade(label="Font Type", menu=font_menu)
 
     # Dark Mode and Light Mode
-    theme_menu = tk.Menu(accessibility_menu, tearoff=False)
+    theme_menu = Menu(accessibility_menu, tearoff=False)
     accessibility_menu.add_cascade(label="Theme", menu=theme_menu)
 
     Program_title_label = Label(root, text="Click on a lesson to begin!")
     Program_title_label.pack()
 
+    #Lesson Buttons
     mammals_button = Button(root, text="Lesson on Mammals", width = 20 , command=open_mammals_lesson)
     mammals_button.pack(pady=20)
 
