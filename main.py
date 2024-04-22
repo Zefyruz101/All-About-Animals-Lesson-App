@@ -39,8 +39,6 @@ def main_window():
 
     root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
-    root.overrideredirect(True)
-
     Program_title_label = Label(root, text="Click on a lesson to begin!")
     Program_title_label.pack
 
