@@ -1,8 +1,8 @@
-from tkinter import *
-from PIL import ImageTk, Image
+from customtkinter import *
+from PIL import Image
 
 # Splash screen
-splash_root = Tk()
+splash_root = CTk()
 
 app_width = 500
 app_height = 500 
@@ -18,11 +18,11 @@ splash_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 #Hide title bar
 splash_root.overrideredirect(True)
 
-splash_label = Label(splash_root, text="Welcome")
+splash_label = CTkLabel(splash_root, text="Welcome")
 splash_label.pack(pady=10)
 
 def open_mammals_lesson():
-    mlesson_root = Tk()
+    mlesson_root = CTk()
     mlesson_root.title('Mammal Lesson')
 
     app_width = 1000
@@ -37,17 +37,17 @@ def open_mammals_lesson():
     mlesson_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
     #Back Button
-    back_button = Button(mlesson_root, text="Back", command=mlesson_root.destroy)
+    back_button = CTkButton(mlesson_root, text="Back", command=mlesson_root.destroy)
     back_button.pack(side="top", anchor="nw")
 
-    mammal_lesson = Label(mlesson_root, text="I love mammal" )
+    mammal_lesson = CTkLabel(mlesson_root, text="I love mammal" )
     mammal_lesson.pack()
 
-    mammal_quiz_button = Button(mlesson_root, text="Quiz", command=mammal_quiz)
+    mammal_quiz_button = CTkButton(mlesson_root, text="Quiz", command=mammal_quiz)
     mammal_quiz_button.pack()
 
 def open_birds_lesson():
-    blesson_root = Tk()
+    blesson_root = CTk()
     blesson_root.title('Bird Lesson')
 
     app_width = 1000
@@ -62,17 +62,17 @@ def open_birds_lesson():
     blesson_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
     #Back Button
-    back_button = Button(blesson_root, text="Back", command=blesson_root.destroy)
+    back_button = CTkButton(blesson_root, text="Back", command=blesson_root.destroy)
     back_button.pack(side="top", anchor="nw")
 
-    bird_lesson = Label(blesson_root, text="I love bird" )
+    bird_lesson = CTkLabel(blesson_root, text="I love bird" )
     bird_lesson.pack()
 
-    bird_quiz_button = Button(blesson_root, text="Quiz", command=bird_quiz)
+    bird_quiz_button = CTkButton(blesson_root, text="Quiz", command=bird_quiz)
     bird_quiz_button.pack()
 
 def open_fish_lesson():
-    flesson_root = Tk()
+    flesson_root = CTk()
     flesson_root.title('Fish Lesson')
 
     app_width = 1000
@@ -87,13 +87,13 @@ def open_fish_lesson():
     flesson_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
     #Back Button
-    back_button = Button(flesson_root, text="Back", command=flesson_root.destroy)
+    back_button = CTkButton(flesson_root, text="Back", command=flesson_root.destroy)
     back_button.pack(side="top", anchor="nw")
 
-    fish_lesson = Label(flesson_root, text="I love fish") 
+    fish_lesson = CTkLabel(flesson_root, text="I love fish") 
     fish_lesson.pack()
 
-    fish_quiz_button = Button(flesson_root, text="Quiz", command=fish_quiz)
+    fish_quiz_button = CTkButton(flesson_root, text="Quiz", command=fish_quiz)
     fish_quiz_button.pack()
 
 def mammal_quiz():
@@ -109,7 +109,7 @@ def fish_quiz():
 def main_window():
     splash_root.destroy()
 
-    root = Tk()
+    root = CTk()
     root.title('All About Animals')
 
     #Setting basic variables for fonts, and window sizing
@@ -125,41 +125,41 @@ def main_window():
     root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
    
-    my_img = ImageTk.PhotoImage(Image.open("bgimg.png"))
+    my_img = Image.PhotoImage(Image.open("bgimg.png"))
     root.my_img = my_img
-    bg_image = Label(image=my_img)
+    bg_image = CTkLabel(image=my_img)
     bg_image.place(relheight=1, relwidth=1)
 
     # Accessibility Menu
-    menubar = Menu(root)
+    menubar = CTkMenu(root)
     root.config(menu=menubar)
-    accessibility_menu = Menu(menubar, tearoff=False)
+    accessibility_menu = CTkMenu(menubar, tearoff=False)
     menubar.add_cascade(label="Accessibility Settings", menu=accessibility_menu)
 
     # Font Type submenu
-    font_menu = Menu(accessibility_menu, tearoff=False)
+    font_menu = CTkMenu(accessibility_menu, tearoff=False)
     accessibility_menu.add_cascade(label="Font Type", menu=font_menu)
 
     # Dark Mode and Light Mode
-    theme_menu = Menu(accessibility_menu, tearoff=False)
+    theme_menu = CTkMenu(accessibility_menu, tearoff=False)
     accessibility_menu.add_cascade(label="Theme", menu=theme_menu)
 
-    Program_title_label = Label(root, text="Click on a lesson to begin!")
+    Program_title_label = CTkLabel(root, text="Click on a lesson to begin!")
     Program_title_label.pack()
 
     #Lesson Buttons
-    mammals_button = Button(root, text="Lesson on Mammals", width=20, command=open_mammals_lesson)
+    mammals_button = CTkButton(root, text="Lesson on Mammals", width=20, command=open_mammals_lesson)
     mammals_button.pack(pady=20)
 
-    birds_button = Button(root, text="Lesson on Birds", width=20, command=open_birds_lesson)
+    birds_button = CTkButton(root, text="Lesson on Birds", width=20, command=open_birds_lesson)
     birds_button.pack(pady=20)
 
-    fish_button = Button(root, text="Lesson on Fish", width=20, command=open_fish_lesson)
+    fish_button = CTkButton(root, text="Lesson on Fish", width=20, command=open_fish_lesson)
     fish_button.pack(pady=20)
 
 
 #Splash screen countdown
 splash_root.after(2000, main_window)
 
-mainloop()
+splash_root.mainloop()
 
