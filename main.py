@@ -19,7 +19,7 @@ splash_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 #Hide title bar
 splash_root.overrideredirect(True)
 
-splash_label = CTkLabel(splash_root, text="Welcome")
+splash_label = CTkLabel(master=splash_root, text="Welcome")
 splash_label.pack(pady=10)
 
 def open_mammals_lesson():
@@ -38,13 +38,13 @@ def open_mammals_lesson():
     mlesson_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
     #Back Button
-    back_button = CTkButton(mlesson_root, text="Back", command=mlesson_root.destroy)
+    back_button = CTkButton(master=mlesson_root, text="Back", command=mlesson_root.destroy)
     back_button.pack(side="top", anchor="nw")
 
-    mammal_lesson = CTkLabel(mlesson_root, text="I love mammal" )
+    mammal_lesson = CTkLabel(master=mlesson_root, text="I love mammal" )
     mammal_lesson.pack()
 
-    mammal_quiz_button = CTkButton(mlesson_root, text="Quiz", command=mammal_quiz)
+    mammal_quiz_button = CTkButton(master=mlesson_root, text="Quiz", command=mammal_quiz)
     mammal_quiz_button.pack()
 
 def open_birds_lesson():
@@ -63,13 +63,13 @@ def open_birds_lesson():
     blesson_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
     #Back Button
-    back_button = CTkButton(blesson_root, text="Back", command=blesson_root.destroy)
+    back_button = CTkButton(master=blesson_root, text="Back", command=blesson_root.destroy)
     back_button.pack(side="top", anchor="nw")
 
-    bird_lesson = CTkLabel(blesson_root, text="I love bird" )
+    bird_lesson = CTkLabel(master=blesson_root, text="I love bird" )
     bird_lesson.pack()
 
-    bird_quiz_button = CTkButton(blesson_root, text="Quiz", command=bird_quiz)
+    bird_quiz_button = CTkButton(master=blesson_root, text="Quiz", command=bird_quiz)
     bird_quiz_button.pack()
 
 def open_fish_lesson():
@@ -88,13 +88,13 @@ def open_fish_lesson():
     flesson_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
     #Back Button
-    back_button = CTkButton(flesson_root, text="Back", command=flesson_root.destroy)
+    back_button = CTkButton(master=flesson_root, text="Back", command=flesson_root.destroy)
     back_button.pack(side="top", anchor="nw")
 
-    fish_lesson = CTkLabel(flesson_root, text="I love fish") 
+    fish_lesson = CTkLabel(master=flesson_root, text="I love fish") 
     fish_lesson.pack()
 
-    fish_quiz_button = CTkButton(flesson_root, text="Quiz", command=fish_quiz)
+    fish_quiz_button = CTkButton(master=flesson_root, text="Quiz", command=fish_quiz)
     fish_quiz_button.pack()
 
 def mammal_quiz():
@@ -145,17 +145,17 @@ def main_window():
     theme_menu = Menu(accessibility_menu, tearoff=False)
     accessibility_menu.add_cascade(label="Theme", menu=theme_menu)
 
-    Program_title_label = CTkLabel(root, text="Click on a lesson to begin!")
+    Program_title_label = CTkLabel(master=root, text="Click on a lesson to begin!")
     Program_title_label.pack()
 
     #Lesson Buttons
-    mammals_button = CTkButton(root, text="Lesson on Mammals", width=20, command=open_mammals_lesson)
+    mammals_button = CTkButton(master=root, text="Lesson on Mammals", width=20, command=open_mammals_lesson)
     mammals_button.pack(pady=20)
 
-    birds_button = CTkButton(root, text="Lesson on Birds", width=20, command=open_birds_lesson)
+    birds_button = CTkButton(master=root, text="Lesson on Birds", width=20, command=open_birds_lesson)
     birds_button.pack(pady=20)
 
-    fish_button = CTkButton(root, text="Lesson on Fish", width=20, command=open_fish_lesson)
+    fish_button = CTkButton(master=root, text="Lesson on Fish", width=20, command=open_fish_lesson)
     fish_button.pack(pady=20)
 
 
