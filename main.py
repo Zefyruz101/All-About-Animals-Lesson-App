@@ -125,7 +125,7 @@ def main_window():
     root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
    
-    my_img = Image.open("bgimg.png")
+    my_img = CTkImage.open("bgimg.png")
     root.my_img = my_img
     bg_image = CTkLabel(master=root, image=my_img)
     bg_image.place(relheight=1, relwidth=1)
