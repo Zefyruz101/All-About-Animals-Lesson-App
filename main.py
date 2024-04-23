@@ -1,5 +1,4 @@
 from customtkinter import *
-from tkinter import *
 from PIL import Image
 
 # Splash screen
@@ -128,22 +127,22 @@ def main_window():
    
     my_img = Image.open("bgimg.png")
     root.my_img = my_img
-    bg_image = CTkLabel(image=my_img)
+    bg_image = CTkLabel(master=root, image=my_img)
     bg_image.place(relheight=1, relwidth=1)
 
     # Accessibility Menu
-    menubar = Menu(root)
-    root.config(menu=menubar)
-    accessibility_menu = Menu(menubar, tearoff=False)
-    menubar.add_cascade(label="Accessibility Settings", menu=accessibility_menu)
+    #menubar = Menu(root)
+    #root.config(menu=menubar)
+    #accessibility_menu = Menu(menubar, tearoff=False)
+   # menubar.add_cascade(label="Accessibility Settings", menu=accessibility_menu)
 
     # Font Type submenu
-    font_menu = Menu(accessibility_menu, tearoff=False)
-    accessibility_menu.add_cascade(label="Font Type", menu=font_menu)
+    #font_menu = Menu(accessibility_menu, tearoff=False)
+    #accessibility_menu.add_cascade(label="Font Type", menu=font_menu)
 
     # Dark Mode and Light Mode
-    theme_menu = Menu(accessibility_menu, tearoff=False)
-    accessibility_menu.add_cascade(label="Theme", menu=theme_menu)
+   # theme_menu = Menu(accessibility_menu, tearoff=False)
+    #accessibility_menu.add_cascade(label="Theme", menu=theme_menu)
 
     Program_title_label = CTkLabel(master=root, text="Click on a lesson to begin!")
     Program_title_label.pack()
