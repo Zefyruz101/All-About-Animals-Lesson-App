@@ -240,18 +240,18 @@ def main_window():
     bg_image.place(relheight=1, relwidth=1)
 
     # Accessibility Menu
-    menubar = ttk.OptionMenu(root)
-    root.config(menu=menubar)
-    accessibility_menu = ttk.OptionMenu(menubar, tearoff=False)
-    menubar.add_cascade(label="Accessibility Settings", menu=accessibility_menu)
+    #menubar = ttk.OptionMenu(root)
+    #root.config(menu=menubar)
+    #accessibility_menu = ttk.OptionMenu(menubar, tearoff=False)
+    #menubar.add_cascade(label="Accessibility Settings", menu=accessibility_menu)
 
     # Font Type submenu
-    font_menu = ttk.OptionMenu(accessibility_menu, tearoff=False)
-    accessibility_menu.add_cascade(label="Font Type", menu=font_menu)
+    #font_menu = ttk.OptionMenu(accessibility_menu, tearoff=False)
+    #accessibility_menu.add_cascade(label="Font Type", menu=font_menu)
 
     # Dark Mode and Light Mode
-    theme_menu = ttk.OptionMenu(accessibility_menu, tearoff=False)
-    accessibility_menu.add_cascade(label="Theme", menu=theme_menu)
+    #theme_menu = ttk.OptionMenu(accessibility_menu, tearoff=False)
+    #accessibility_menu.add_cascade(label="Theme", menu=theme_menu)
 
     Program_title_label = ttk.Label(root, text="Click on a lesson to begin!")
     Program_title_label.pack()
