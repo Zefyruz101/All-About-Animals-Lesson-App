@@ -4,6 +4,7 @@ from ttkbootstrap import Style
 from PIL import Image, ImageTk
 from mquiz_data import mquiz_data
 
+
 # Splash screen
 splash_root = Tk()
 
@@ -23,6 +24,11 @@ splash_root.overrideredirect(True)
 
 splash_label = ttk.Label(splash_root, text="Welcome")
 splash_label.pack(pady=10)
+
+
+
+
+
 
 def open_mammals_lesson():
     mlesson_root = Tk()
@@ -107,6 +113,11 @@ def open_fish_lesson():
 
 
 def mammal_quiz():
+    global current_question, score, qs_label, choice_btns, feedback_label, score_label, next_btn
+    current_question = 0
+    score = 0
+
+    # Function to display the current question and choices
     def show_question():
         # Get the current question from the quiz_data list
         question = mquiz_data[current_question]
@@ -153,9 +164,10 @@ def mammal_quiz():
         else:
             # If all questions have been answered, display the final score and end the quiz
             messagebox.showinfo("Quiz Completed",
-                                "Quiz Completed! Final score: {}/{}".format(score, len(mquiz_data)))
+                                "Mammal Quiz Completed! Final score: {}/{}".format(score, len(mquiz_data)))
             mq_root.destroy()
 
+    # Create the quiz window
     mq_root = Tk()
     mq_root.title("Mammal Quiz")
     style = Style(theme="flatly")
@@ -223,11 +235,8 @@ def mammal_quiz():
     )
     next_btn.pack(pady=10)
 
-    # Initialize the current question index
-    current_question = 0
-
     # Show the first question
-    show_question()                     
+    show_question()                                          
 
 def bird_quiz():
     pass
