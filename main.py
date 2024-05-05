@@ -27,15 +27,12 @@ splash_label.pack(pady=10)
 
 
 
-
-
-
 def open_mammals_lesson():
     mlesson_root = Tk()
     mlesson_root.title('Mammal Lesson')
 
-    app_width = 1000
-    app_height = 700 
+    app_width = 970
+    app_height = 670
 
     screen_width = mlesson_root.winfo_screenwidth()
     screen_height = mlesson_root.winfo_screenheight()
@@ -54,15 +51,15 @@ def open_mammals_lesson():
     mammal_lesson.pack()
 
     #Quiz button
-    mammal_quiz_button = ttk.Button(mlesson_root, text="Quiz", command=mammal_quiz)
+    mammal_quiz_button = ttk.Button(mlesson_root, text="Quiz", command=lambda: [mammal_quiz(), mlesson_root.destroy()])
     mammal_quiz_button.pack()
 
 def open_birds_lesson():
     blesson_root = Tk()
     blesson_root.title('Bird Lesson')
 
-    app_width = 1000
-    app_height = 700 
+    app_width = 970
+    app_height = 670
 
     screen_width = blesson_root.winfo_screenwidth()
     screen_height = blesson_root.winfo_screenheight()
@@ -88,8 +85,8 @@ def open_fish_lesson():
     flesson_root = Tk()
     flesson_root.title('Fish Lesson')
 
-    app_width = 1000
-    app_height = 700 
+    app_width = 970
+    app_height = 670
 
     screen_width = flesson_root.winfo_screenwidth()
     screen_height = flesson_root.winfo_screenheight()
@@ -113,6 +110,7 @@ def open_fish_lesson():
 
 
 def mammal_quiz():
+
     global current_question, score, qs_label, choice_btns, feedback_label, score_label, next_btn
     current_question = 0
     score = 0
@@ -176,8 +174,8 @@ def mammal_quiz():
     style.configure("TLabel", font=("Helvetica", 20))
     style.configure("TButton", font=("Helvetica", 16))
 
-    app_width = 1000
-    app_height = 700 
+    app_width = 970
+    app_height = 670
 
     screen_width = mq_root.winfo_screenwidth()
     screen_height = mq_root.winfo_screenheight()
@@ -298,6 +296,6 @@ def main_window():
 
 
 #Splash screen countdown
-splash_root.after(2000, main_window)
+splash_root.after(800, main_window)
 
 splash_root.mainloop()
