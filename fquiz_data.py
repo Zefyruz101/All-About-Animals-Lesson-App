@@ -1,12 +1,12 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
 from ttkbootstrap import Style
-from quiz_data import quiz_data
+from mquiz_data import mquiz_data
 
 # Function to display the current question and choices
 def show_question():
     # Get the current question from the quiz_data list
-    question = quiz_data[current_question]
+    question = mquiz_data[current_question]
     qs_label.config(text=question["question"])
 
     # Display the choices on the buttons
@@ -21,7 +21,7 @@ def show_question():
 # Function to check the selected answer and provide feedback
 def check_answer(choice):
     # Get the current question from the quiz_data list
-    question = quiz_data[current_question]
+    question = mquiz_data[current_question]
     selected_choice = choice_btns[choice].cget("text")
 
     # Check if the selected choice matches the correct answer
@@ -29,7 +29,7 @@ def check_answer(choice):
         # Update the score and display it
         global score
         score += 1
-        score_label.config(text="Score: {}/{}".format(score, len(quiz_data)))
+        score_label.config(text="Score: {}/{}".format(score, len(mquiz_data)))
         feedback_label.config(text="Correct!", foreground="green")
     else:
         feedback_label.config(text="Incorrect!", foreground="red")
@@ -44,13 +44,13 @@ def next_question():
     global current_question
     current_question +=1
 
-    if current_question < len(quiz_data):
+    if current_question < len(mquiz_data):
         # If there are more questions, show the next question
         show_question()
     else:
         # If all questions have been answered, display the final score and end the quiz
         messagebox.showinfo("Quiz Completed",
-                            "Quiz Completed! Final score: {}/{}".format(score, len(quiz_data)))
+                            "Quiz Completed! Final score: {}/{}".format(score, len(mquiz_data)))
         root.destroy()
 
 # Create the main window
@@ -96,7 +96,7 @@ score = 0
 # Create the score label
 score_label = ttk.Label(
     root,
-    text="Score: 0/{}".format(len(quiz_data)),
+    text="Score: 0/{}".format(len(mquiz_data)),
     anchor="center",
     padding=10
 )

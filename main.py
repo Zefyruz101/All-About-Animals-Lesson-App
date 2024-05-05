@@ -107,11 +107,25 @@ def open_fish_lesson():
 
 
 def mammal_quiz():
-    #Function that checks the users answers
+    def show_question():
+        # Get the current question from the quiz_data list
+        question = mquiz_data[current_question]
+        qs_label.config(text=question["question"])
+
+        # Display the choices on the buttons
+        choices = question["choices"]
+        for i in range(4):
+            choice_btns[i].config(text=choices[i], state="normal") # Reset button state
+
+        # Clear the feedback label and disable the next button
+        feedback_label.config(text="")
+        next_btn.config(state="disabled")
+
+    # Function to check the selected answer and provide feedback
     def check_answer(choice):
         # Get the current question from the quiz_data list
         question = mquiz_data[current_question]
-        selected_choice = choice_buttons[choice].cget("text")
+        selected_choice = choice_btns[choice].cget("text")
 
         # Check if the selected choice matches the correct answer
         if selected_choice == question["answer"]:
@@ -124,26 +138,11 @@ def mammal_quiz():
             feedback_label.config(text="Incorrect!", foreground="red")
         
         # Disable all choice buttons and enable the next button
-        for button in choice_buttons:
+        for button in choice_btns:
             button.config(state="disabled")
-            next_button.config(state="normal")
-    
-    #Function that displays current question along with multiple choice
-    def show_question():
-        # Get the current question from the quiz_data list
-        question = mquiz_data[current_question]
-        question_label.config(text=question["question"])
+        next_btn.config(state="normal")
 
-        # Display the choices on the buttons
-        choices = question["choices"]
-        for i in range(4):
-            choice_buttons[i].config(text=choices[i], state="normal") # Reset button state
-
-        # Clear the feedback label and disable the next button
-        feedback_label.config(text="")
-        next_button.config(state="disabled")
-
-    #Function that changes the question after user answers a previous one
+    # Function to move to the next question
     def next_question():
         global current_question
         current_question +=1
@@ -176,34 +175,56 @@ def mammal_quiz():
 
     mq_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
-    #Question Label
-    question_label = ttk.Label(mq_root, anchor="center", wraplength = 500, padding=10)
-    question_label.pack(pady=10)
+    # Create the question label
+    qs_label = ttk.Label(
+        mq_root,
+        anchor="center",
+        wraplength=500,
+        padding=10
+    )
+    qs_label.pack(pady=10)
 
-    #Choice buttons
-    choice_buttons = []
+    # Create the choice buttons
+    choice_btns = []
     for i in range(4):
-        button = ttk.Button(mq_root, command=lambda i=i: check_answer(i))
+        button = ttk.Button(
+            mq_root,
+            command=lambda i=i: check_answer(i)
+        )
         button.pack(pady=5)
-        choice_buttons.append(button)
-    
-    #Feedback label
-    feedback_label = ttk.Label(mq_root, anchor = "center", padding=10)
-    feedback_label.pack()
+        choice_btns.append(button)
 
-    #Initialise score
-    score = 0 
+    # Create the feedback label
+    feedback_label = ttk.Label(
+        mq_root,
+        anchor="center",
+        padding=10
+    )
+    feedback_label.pack(pady=10)
 
-    #Score label
-    score_label = ttk.Label(mq_root, text="Score: 0/{}".format(len(mquiz_data)), anchor = "center", padding=10)
-    score_label.pack()
+    # Initialize the score
+    score = 0
 
-    #Next button 
-    next_button = ttk.Button(mq_root, text="Next", command=next_question, state="disabled")
-    next_button.pack(pady=10)
-    
+    # Create the score label
+    score_label = ttk.Label(
+        mq_root,
+        text="Score: 0/{}".format(len(mquiz_data)),
+        anchor="center",
+        padding=10
+    )
+    score_label.pack(pady=10)
+
+    # Create the next button
+    next_btn = ttk.Button(
+        mq_root,
+        text="Next",
+        command=next_question,
+        state="disabled"
+    )
+    next_btn.pack(pady=10)
+
     # Initialize the current question index
-    current_question = 0         
+    current_question = 0
 
     # Show the first question
     show_question()                     
@@ -220,9 +241,9 @@ def main_window():
 
     root = Tk()
     root.title('All About Animals')
-
+    root.resizable(False, False)
     #Setting basic variables for fonts, and window sizing
-    app_width = 985
+    app_width = 970
     app_height = 670
 
     screen_width = root.winfo_screenwidth()
