@@ -8,8 +8,8 @@ from mquiz_data import mquiz_data
 # Splash screen
 splash_root = Tk()
 
-app_width = 500
-app_height = 500 
+app_width = 520
+app_height = 460 
 
 screen_width = splash_root.winfo_screenwidth()
 screen_height = splash_root.winfo_screenheight()
@@ -19,11 +19,13 @@ y = (screen_height / 2) - (app_height / 2)
 
 splash_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
+splash_img = ImageTk.PhotoImage(Image.open("monkey.png"))
+splash_img.my_img = splash_img
+bg_image = ttk.Label(image=splash_img)
+bg_image.place(relheight=1, relwidth=1)
+
 #Hide title bar
 splash_root.overrideredirect(True)
-
-splash_label = ttk.Label(splash_root, text="Welcome")
-splash_label.pack(pady=10)
 
 
 
@@ -296,6 +298,6 @@ def main_window():
 
 
 #Splash screen countdown
-splash_root.after(800, main_window)
+splash_root.after(1250, main_window)
 
 splash_root.mainloop()
