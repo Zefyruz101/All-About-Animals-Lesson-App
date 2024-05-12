@@ -1,4 +1,5 @@
 from tkinter import messagebox, Tk
+from tkinter import Text
 from tkinter import ttk
 from ttkbootstrap import Style
 from PIL import Image, ImageTk
@@ -49,9 +50,22 @@ def open_mammals_lesson():
     back_button.pack(side="top", anchor="nw")
 
     #Lesson content
-    mammal_lesson = ttk.Label(mlesson_root, text="I love mammal" )
-    mammal_lesson.pack()
+    mammal_lesson_content = """
+    Introduction:
+    Mammals are a fascinating group of animals that share some special features. They're warm-blooded, which means they can control their body temperature even when it's cold outside. One of the most unique things about mammals is that they all have hair or fur covering their bodies at some point in their lives. They also give birth to live babies and feed them with milk produced by mammary glands, which is why they're called mammals. From tiny mice to huge whales, mammals come in all shapes and sizes, and they can be found in almost every corner of the world, including your own backyard!
 
+    Mammal Habitats:
+    Mammals are found in every major habitat around the world. Some mammals, like polar bears and Arctic foxes, live in cold places like the Arctic and Antarctic regions where they have thick fur to keep them warm. Others, like lions and giraffes, live in hot places like the African savannah, where they can find plenty of sunshine and open grasslands to roam. Many mammals, such as squirrels and rabbits, live in forests where they can find trees to climb and hide in. Some even make their homes underground, like moles and groundhogs. No matter where they live, mammals adapt to their habitats to find food, shelter, and safety.
+
+    Behaviours:
+    Mammals have different behaviours that help them survive and thrive. Young mammals learn important skills, like hunting, from their parents before they grow up and go off alone or stay with their families. Some mammals mark their territory and protect it from others. Certain groups of mammals move to different places at different times of the year. Some mammals take long naps during the winter called hibernation to save energy. When it comes to food, mammals have different diets. Carnivores eat meat, like cats and dogs. Herbivores eat plants, like deer and elephants. And then there are omnivores, like raccoons and bears, who eat both plants and animals. These behaviours help mammals survive in their environments.
+    """
+
+    # Create a Text widget to display the lesson content
+    m_lesson_text = Text(mlesson_root, wrap="word", width=70, height=1)
+    m_lesson_text.insert("1.0", mammal_lesson_content)
+    m_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
+    
     #Quiz button
     mammal_quiz_button = ttk.Button(mlesson_root, text="Quiz", command=lambda: [mammal_quiz(), mlesson_root.destroy()])
     mammal_quiz_button.pack()
@@ -75,6 +89,12 @@ def open_birds_lesson():
     back_button = ttk.Button(blesson_root, text="Back", command=blesson_root.destroy)
     back_button.pack(side="top", anchor="nw")
 
+    
+
+    # Create a Text widget to display the lesson content
+    b_lesson_text = Text(blesson_root, wrap="word", width=70, height=1)
+    b_lesson_text.insert("1.0", bird_lesson_content)
+    b_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
     #Lesson content
     bird_lesson = ttk.Label(blesson_root, text="I love bird" )
     bird_lesson.pack()
@@ -298,6 +318,6 @@ def main_window():
 
 
 #Splash screen countdown
-splash_root.after(1250, main_window)
+splash_root.after(1500, main_window)
 
 splash_root.mainloop()
