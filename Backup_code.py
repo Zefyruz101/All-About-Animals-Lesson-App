@@ -5,6 +5,28 @@ from ttkbootstrap import Style
 from PIL import Image, ImageTk
 from mquiz_data import mquiz_data
 
+# Splash screen
+splash_root = Tk()
+
+app_width = 520
+app_height = 460 
+
+screen_width = splash_root.winfo_screenwidth()
+screen_height = splash_root.winfo_screenheight()
+
+x = (screen_width / 2) - (app_width / 2)
+y = (screen_height / 2) - (app_height / 2)
+
+splash_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+splash_img = ImageTk.PhotoImage(Image.open("monkey.png"))
+splash_img.my_img = splash_img
+bg_image = ttk.Label(image=splash_img)
+bg_image.place(relheight=1, relwidth=1)
+
+#Hide title bar
+splash_root.overrideredirect(True)
+
 
 def open_mammals_lesson():
     mlesson_root = Toplevel()
@@ -196,7 +218,7 @@ def mammal_quiz():
             mq_root.destroy()
 
     # Create the quiz window
-    mq_root = Toplevel()
+    mq_root = Tk()
     mq_root.title("Mammal Quiz")
     style = Style(theme="flatly")
 
@@ -272,42 +294,48 @@ def bird_quiz():
 def fish_quiz():
     pass
 
-
-
+#Main program
+def main_window():
+    splash_root.destroy()
     
-root = Tk()
-root.title('All About Animals')
-root.resizable(False, False)
-#Setting basic variables for fonts, and window sizing
-app_width = 970
-app_height = 670
+    root = Tk()
+    root.title('All About Animals')
+    root.resizable(False, False)
+    #Setting basic variables for fonts, and window sizing
+    app_width = 970
+    app_height = 670
 
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
 
-x = (screen_width / 2) - (app_width / 2)
-y = (screen_height / 2) - (app_height / 2)
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
 
-root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+    root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
    
-my_img = ImageTk.PhotoImage(Image.open("bgimg.png"))
-root.my_img = my_img
-bg_image = ttk.Label(image=my_img)
-bg_image.place(relheight=1, relwidth=1)
+    my_img = ImageTk.PhotoImage(Image.open("bgimg.png"))
+    root.my_img = my_img
+    bg_image = ttk.Label(image=my_img)
+    bg_image.place(relheight=1, relwidth=1)
 
-Program_title_label = ttk.Label(root, text="Click on a lesson to begin!")
-Program_title_label.pack()
+    Program_title_label = ttk.Label(root, text="Click on a lesson to begin!")
+    Program_title_label.pack()
 
-#Lesson Buttons
-mammals_button = ttk.Button(root, text="Lesson on Mammals", width=20, command=open_mammals_lesson)
-mammals_button.pack(pady=20)
+    #Lesson Buttons
+    mammals_button = ttk.Button(root, text="Lesson on Mammals", width=20, command=open_mammals_lesson)
+    mammals_button.pack(pady=20)
 
-birds_button = ttk.Button(root, text="Lesson on Birds", width=20, command=open_birds_lesson)
-birds_button.pack(pady=20)
+    birds_button = ttk.Button(root, text="Lesson on Birds", width=20, command=open_birds_lesson)
+    birds_button.pack(pady=20)
 
-fish_button = ttk.Button(root, text="Lesson on Fish", width=20, command=open_fish_lesson)
-fish_button.pack(pady=20)
+    fish_button = ttk.Button(root, text="Lesson on Fish", width=20, command=open_fish_lesson)
+    fish_button.pack(pady=20)
 
-root.mainloop()
+    root.mainloop()
 
+
+#Splash screen countdown
+splash_root.after(1500, main_window)
+
+splash_root.mainloop()
