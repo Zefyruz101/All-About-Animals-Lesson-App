@@ -1,5 +1,6 @@
 from tkinter import messagebox, Tk
 from tkinter import Text
+from tkinter import Menu
 from tkinter import ttk
 from ttkbootstrap import Style
 from PIL import Image, ImageTk
@@ -49,6 +50,22 @@ def open_mammals_lesson():
     back_button = ttk.Button(mlesson_root, text="Back", command=mlesson_root.destroy)
     back_button.pack(side="top", anchor="nw")
 
+    #creating the Accessibility menu
+    menubar = Menu(mlesson_root)
+    mlesson_root.config(menu=menubar)
+
+    # Accessibility Menu
+    accessibility_menu = Menu(menubar, tearoff=False)
+    menubar.add_cascade(label="Accessibility Settings", menu=accessibility_menu)
+
+    # Font Type submenu
+    font_menu = Menu(accessibility_menu, tearoff=False)
+    accessibility_menu.add_cascade(label="Font Type", menu=font_menu)
+
+    # Dark Mode and Light Mode
+    theme_menu = Menu(accessibility_menu, tearoff=False)
+    accessibility_menu.add_cascade(label="Theme", menu=theme_menu)
+
     #Lesson content
     mammal_lesson_content = """
     Introduction:
@@ -89,15 +106,18 @@ def open_birds_lesson():
     back_button = ttk.Button(blesson_root, text="Back", command=blesson_root.destroy)
     back_button.pack(side="top", anchor="nw")
 
-    
+    #Lesson content
+    bird_lesson_content = '''
+
+
+
+    '''
 
     # Create a Text widget to display the lesson content
     b_lesson_text = Text(blesson_root, wrap="word", width=70, height=1)
     b_lesson_text.insert("1.0", bird_lesson_content)
     b_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
-    #Lesson content
-    bird_lesson = ttk.Label(blesson_root, text="I love bird" )
-    bird_lesson.pack()
+    
 
     #Quiz button
     bird_quiz_button = ttk.Button(blesson_root, text="Quiz", command=bird_quiz)
