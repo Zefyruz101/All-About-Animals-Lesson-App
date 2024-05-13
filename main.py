@@ -1,11 +1,9 @@
+from tkinter import *
 from tkinter import messagebox, Tk
-from tkinter import Text
-from tkinter import Menu
 from tkinter import ttk
 from ttkbootstrap import Style
 from PIL import Image, ImageTk
 from mquiz_data import mquiz_data
-
 
 # Splash screen
 splash_root = Tk()
@@ -30,9 +28,8 @@ bg_image.place(relheight=1, relwidth=1)
 splash_root.overrideredirect(True)
 
 
-
 def open_mammals_lesson():
-    mlesson_root = Tk()
+    mlesson_root = Toplevel()
     mlesson_root.title('Mammal Lesson')
 
     app_width = 970
@@ -50,21 +47,36 @@ def open_mammals_lesson():
     back_button = ttk.Button(mlesson_root, text="Back", command=mlesson_root.destroy)
     back_button.pack(side="top", anchor="nw")
 
-    #creating the Accessibility menu
-    menubar = Menu(mlesson_root)
-    mlesson_root.config(menu=menubar)
+    #File buttons
+    my_menu = Menu(mlesson_root)
+    mlesson_root.config(menu=my_menu)
 
-    # Accessibility Menu
-    accessibility_menu = Menu(menubar, tearoff=False)
-    menubar.add_cascade(label="Accessibility Settings", menu=accessibility_menu)
+    #Menu for exiting
+    file_menu = Menu(my_menu)
+    my_menu.add_cascade(label="File", menu=file_menu)
+    file_menu.add_command(label="Exit", command=mlesson_root.destroy)
 
-    # Font Type submenu
-    font_menu = Menu(accessibility_menu, tearoff=False)
-    accessibility_menu.add_cascade(label="Font Type", menu=font_menu)
+    #Themes & Options
+    themes_menu = Menu(my_menu)
+    my_menu.add_cascade(label="Themes", menu=themes_menu)
+    themes_menu.add_command(label='Original Theme')
+    themes_menu.add_command(label='Night Mode')
+    themes_menu.add_command(label="Sepia", )
 
-    # Dark Mode and Light Mode
-    theme_menu = Menu(accessibility_menu, tearoff=False)
-    accessibility_menu.add_cascade(label="Theme", menu=theme_menu)
+    #Font Type Selection
+    fonts_menu = Menu(my_menu)
+    my_menu.add_cascade(label="Fonts", menu=fonts_menu)
+    fonts_menu.add_command(label="Arial", ) # Setting to Arial
+    fonts_menu.add_command(label="Century Gothic", ) # Setting to Century Gothic
+    fonts_menu.add_command(label="Comic Sans MS", ) # Setting to Comic Sans MS
+    fonts_menu.add_command(label="Georgia", ) # Setting to Georgia
+    fonts_menu.add_command(label="Elephant", ) # Setting to Elephant
+
+    #Scaling menu of 100% and 150%
+    sizing_menu = Menu(my_menu)
+    my_menu.add_cascade(label="Sizing", menu= sizing_menu)
+    sizing_menu.add_command(label="13" , ) #New scaling factor is set to 1.0
+    sizing_menu.add_command(label="14" , ) # New scaling factor is set to 1.5
 
     #Lesson content
     mammal_lesson_content = """
@@ -88,7 +100,7 @@ def open_mammals_lesson():
     mammal_quiz_button.pack()
 
 def open_birds_lesson():
-    blesson_root = Tk()
+    blesson_root = Toplevel()
     blesson_root.title('Bird Lesson')
 
     app_width = 970
@@ -109,8 +121,6 @@ def open_birds_lesson():
     #Lesson content
     bird_lesson_content = '''
 
-
-
     '''
 
     # Create a Text widget to display the lesson content
@@ -124,7 +134,7 @@ def open_birds_lesson():
     bird_quiz_button.pack()
 
 def open_fish_lesson():
-    flesson_root = Tk()
+    flesson_root = Toplevel()
     flesson_root.title('Fish Lesson')
 
     app_width = 970
@@ -309,20 +319,6 @@ def main_window():
     bg_image = ttk.Label(image=my_img)
     bg_image.place(relheight=1, relwidth=1)
 
-    # Accessibility Menu
-    #menubar = ttk.OptionMenu(root)
-    #root.config(menu=menubar)
-    #accessibility_menu = ttk.OptionMenu(menubar, tearoff=False)
-    #menubar.add_cascade(label="Accessibility Settings", menu=accessibility_menu)
-
-    # Font Type submenu
-    #font_menu = ttk.OptionMenu(accessibility_menu, tearoff=False)
-    #accessibility_menu.add_cascade(label="Font Type", menu=font_menu)
-
-    # Dark Mode and Light Mode
-    #theme_menu = ttk.OptionMenu(accessibility_menu, tearoff=False)
-    #accessibility_menu.add_cascade(label="Theme", menu=theme_menu)
-
     Program_title_label = ttk.Label(root, text="Click on a lesson to begin!")
     Program_title_label.pack()
 
@@ -335,6 +331,8 @@ def main_window():
 
     fish_button = ttk.Button(root, text="Lesson on Fish", width=20, command=open_fish_lesson)
     fish_button.pack(pady=20)
+
+    root.mainloop()
 
 
 #Splash screen countdown
