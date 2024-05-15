@@ -4,6 +4,8 @@ from tkinter import ttk
 from ttkbootstrap import Style
 from PIL import Image, ImageTk
 from mquiz_data import mquiz_data
+from bquiz_data import bquiz_data
+from fquiz_data import fquiz_data 
 
 
 def open_mammals_lesson():
@@ -53,8 +55,8 @@ def open_mammals_lesson():
     #Scaling menu of 100% and 150%
     sizing_menu = Menu(my_menu)
     my_menu.add_cascade(label="Sizing", menu= sizing_menu)
-    sizing_menu.add_command(label="13" , ) #New scaling factor is set to 1.0
-    sizing_menu.add_command(label="14" , ) # New scaling factor is set to 1.5
+    sizing_menu.add_command(label="13" , ) 
+    sizing_menu.add_command(label="14" , ) 
 
     #Lesson content
     mammal_lesson_content = """
@@ -174,7 +176,8 @@ def mammal_quiz():
             score_label.config(text="Score: {}/{}".format(score, len(mquiz_data)))
             feedback_label.config(text="Correct!", foreground="green")
         else:
-            feedback_label.config(text="Incorrect!", foreground="red")
+            correct_answer = question["answer"]
+            feedback_label.config(text="Incorrect!\nThe correct answer is: {}".format(correct_answer), foreground="red")
         
         # Disable all choice buttons and enable the next button
         for button in choice_btns:
@@ -267,10 +270,266 @@ def mammal_quiz():
     show_question()                                          
 
 def bird_quiz():
-    pass
+
+    global current_question, score, qs_label, choice_btns, feedback_label, score_label, next_btn
+    current_question = 0
+    score = 0
+
+    # Function to display the current question and choices
+    def show_question():
+        # Get the current question from the quiz_data list
+        question = bquiz_data[current_question]
+        qs_label.config(text=question["question"])
+
+        # Display the choices on the buttons
+        choices = question["choices"]
+        for i in range(4):
+            choice_btns[i].config(text=choices[i], state="normal") # Reset button state
+
+        # Clear the feedback label and disable the next button
+        feedback_label.config(text="")
+        next_btn.config(state="disabled")
+
+    # Function to check the selected answer and provide feedback
+    def check_answer(choice):
+        # Get the current question from the quiz_data list
+        question = bquiz_data[current_question]
+        selected_choice = choice_btns[choice].cget("text")
+
+        # Check if the selected choice matches the correct answer
+        if selected_choice == question["answer"]:
+            # Update the score and display it
+            global score
+            score += 1
+            score_label.config(text="Score: {}/{}".format(score, len(bquiz_data)))
+            feedback_label.config(text="Correct!", foreground="green")
+        else:
+            correct_answer = question["answer"]
+            feedback_label.config(text="Incorrect!\nThe correct answer is: {}".format(correct_answer), foreground="red")
+        
+        # Disable all choice buttons and enable the next button
+        for button in choice_btns:
+            button.config(state="disabled")
+        next_btn.config(state="normal")
+
+    # Function to move to the next question
+    def next_question():
+        global current_question
+        current_question +=1
+
+        if current_question < len(bquiz_data):
+            # If there are more questions, show the next question
+            show_question()
+        else:
+            # If all questions have been answered, display the final score and end the quiz
+            messagebox.showinfo("Quiz Completed",
+                                "Bird Quiz Completed! Final score: {}/{}".format(score, len(bquiz_data)))
+            bq_root.destroy()
+
+    # Create the quiz window
+    bq_root = Toplevel()
+    bq_root.title("Bird Quiz")
+    style = Style(theme="flatly")
+
+    # Configure the font size for the question and choice buttons
+    style.configure("TLabel", font=("Helvetica", 20))
+    style.configure("TButton", font=("Helvetica", 16))
+
+    app_width = 970
+    app_height = 670
+
+    screen_width = bq_root.winfo_screenwidth()
+    screen_height = bq_root.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    bq_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    # Create the question label
+    qs_label = ttk.Label(
+        bq_root,
+        anchor="center",
+        wraplength=600,
+        padding=10
+    )
+    qs_label.pack(pady=10)
+
+    # Create the choice buttons
+    choice_btns = []
+    for i in range(4):
+        button = ttk.Button(
+            bq_root,
+            command=lambda i=i: check_answer(i)
+        )
+        button.pack(pady=5)
+        choice_btns.append(button)
+
+    # Create the feedback label
+    feedback_label = ttk.Label(
+        bq_root,
+        anchor="center",
+        padding=10
+    )
+    feedback_label.pack(pady=10)
+
+    # Initialize the score
+    score = 0
+
+    # Create the score label
+    score_label = ttk.Label(
+        bq_root,
+        text="Score: 0/{}".format(len(bquiz_data)),
+        anchor="center",
+        padding=10
+    )
+    score_label.pack(pady=10)
+
+    # Create the next button
+    next_btn = ttk.Button(
+        bq_root,
+        text="Next",
+        command=next_question,
+        state="disabled"
+    )
+    next_btn.pack(pady=10)
+
+    # Show the first question
+    show_question()  
 
 def fish_quiz():
-    pass
+
+    global current_question, score, qs_label, choice_btns, feedback_label, score_label, next_btn
+    current_question = 0
+    score = 0
+
+    # Function to display the current question and choices
+    def show_question():
+        # Get the current question from the quiz_data list
+        question = fquiz_data[current_question]
+        qs_label.config(text=question["question"])
+
+        # Display the choices on the buttons
+        choices = question["choices"]
+        for i in range(4):
+            choice_btns[i].config(text=choices[i], state="normal") # Reset button state
+
+        # Clear the feedback label and disable the next button
+        feedback_label.config(text="")
+        next_btn.config(state="disabled")
+
+    # Function to check the selected answer and provide feedback
+    def check_answer(choice):
+        # Get the current question from the quiz_data list
+        question = fquiz_data[current_question]
+        selected_choice = choice_btns[choice].cget("text")
+
+        # Check if the selected choice matches the correct answer
+        if selected_choice == question["answer"]:
+            # Update the score and display it
+            global score
+            score += 1
+            score_label.config(text="Score: {}/{}".format(score, len(fquiz_data)))
+            feedback_label.config(text="Correct!", foreground="green")
+        else:
+            correct_answer = question["answer"]
+            feedback_label.config(text="Incorrect!\nThe correct answer is: {}".format(correct_answer), foreground="red")
+        
+        # Disable all choice buttons and enable the next button
+        for button in choice_btns:
+            button.config(state="disabled")
+        next_btn.config(state="normal")
+
+    # Function to move to the next question
+    def next_question():
+        global current_question
+        current_question +=1
+
+        if current_question < len(fquiz_data):
+            # If there are more questions, show the next question
+            show_question()
+        else:
+            # If all questions have been answered, display the final score and end the quiz
+            messagebox.showinfo("Quiz Completed",
+                                "Fish Quiz Completed! Final score: {}/{}".format(score, len(mquiz_data)))
+            fq_root.destroy()
+
+    # Create the quiz window
+    fq_root = Toplevel()
+    fq_root.title("Fish Quiz")
+    fq_root.resizable(False, False)
+    style = Style(theme="flatly")
+
+    # Configure the font size for the question and choice buttons
+    style.configure("TLabel", font=("Helvetica", 20))
+    style.configure("TButton", font=("Helvetica", 16))
+
+    app_width = 970
+    app_height = 670
+
+    screen_width = fq_root.winfo_screenwidth()
+    screen_height = fq_root.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    fq_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    fquiz_img = ImageTk.PhotoImage(Image.open("fishimg.png"))
+    fq_root.fquiz_img = fquiz_img
+    fquiz_image = ttk.Label(fq_root, image=fquiz_img)
+    fquiz_image.place(relheight=1, relwidth=1)
+
+    # Create the question label
+    qs_label = ttk.Label(
+        fq_root,
+        anchor="center",
+        wraplength=500,
+        padding=10
+    )
+    qs_label.pack(pady=10)
+
+    # Create the choice buttons
+    choice_btns = []
+    for i in range(4):
+        button = ttk.Button(
+            fq_root,
+            command=lambda i=i: check_answer(i)
+        )
+        button.pack(pady=5)
+        choice_btns.append(button)
+
+    # Create the feedback label
+    feedback_label = ttk.Label(
+        fq_root,
+        anchor="center",
+        padding=10
+    )
+    feedback_label.pack(pady=10)
+
+    # Initialize the score
+    score = 0
+
+    # Create the score label
+    score_label = ttk.Label(
+        fq_root,
+        text="Score: 0/{}".format(len(fquiz_data)),
+        anchor="center",
+        padding=10
+    )
+    score_label.pack(pady=10)
+
+    # Create the next button
+    next_btn = ttk.Button(
+        fq_root,
+        text="Next",
+        command=next_question,
+        state="disabled"
+    )
+    next_btn.pack(pady=10)
+
+    # Show the first question
+    show_question()  
 
 
 
@@ -300,13 +559,13 @@ Program_title_label = ttk.Label(root, text="Click on a lesson to begin!")
 Program_title_label.pack()
 
 #Lesson Buttons
-mammals_button = ttk.Button(root, text="Lesson on Mammals", width=20, command=open_mammals_lesson)
+mammals_button = Button(root, text="Lesson on Mammals", width=20, command=open_mammals_lesson)
 mammals_button.pack(pady=20)
 
-birds_button = ttk.Button(root, text="Lesson on Birds", width=20, command=open_birds_lesson)
+birds_button = Button(root, text="Lesson on Birds", width=20, command=open_birds_lesson)
 birds_button.pack(pady=20)
 
-fish_button = ttk.Button(root, text="Lesson on Fish", width=20, command=open_fish_lesson)
+fish_button = Button(root, text="Lesson on Fish", width=20, command=open_fish_lesson)
 fish_button.pack(pady=20)
 
 root.mainloop()
