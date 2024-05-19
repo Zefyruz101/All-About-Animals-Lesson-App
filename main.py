@@ -58,16 +58,18 @@ def open_mammals_lesson():
     my_menu.add_cascade(label="Fonts", menu=fonts_menu)
     fonts_menu.add_command(label="Arial", command=lambda: update_font("Arial") ) # Setting to Arial
     fonts_menu.add_command(label="Century Gothic", command=lambda: update_font("Century Gothic") ) # Setting to Century Gothic
-    fonts_menu.add_command(label="Comic Sans MS", command=lambda: update_font("Comic Sans MS") ) # Setting to Comic Sans MS
-    fonts_menu.add_command(label="Georgia", command=lambda: update_font("Georgia") ) # Setting to Georgia
-    fonts_menu.add_command(label="Elephant", command=lambda: update_font("Elephant") ) # Setting to Elephant
+    fonts_menu.add_command(label="Times New Roman", command=lambda: update_font("Times New Roman") ) # Setting to Times New Roman
+    fonts_menu.add_command(label="Calibri", command=lambda: update_font("Calibri") ) # Setting to Calibri
+    fonts_menu.add_command(label="Verdana", command=lambda: update_font("Verdana") ) # Setting to Verdana
 
-    #Scaling menu of 100% and 150%
+    #Text Size Menu
     sizing_menu = Menu(my_menu)
     my_menu.add_cascade(label="Sizing", menu= sizing_menu)
-    sizing_menu.add_command(label="13" , ) 
-    sizing_menu.add_command(label="14" , ) 
-
+    sizing_menu.add_command(label="12", ) 
+    sizing_menu.add_command(label="13", ) 
+    sizing_menu.add_command(label="14", ) 
+    sizing_menu.add_command(label="15", ) 
+    sizing_menu.add_command(label="16", ) 
     #Lesson content
     mammal_lesson_content = """Mammal Lesson
 
@@ -297,6 +299,11 @@ def mammal_quiz():
 
     mq_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
+    mquiz_img = ImageTk.PhotoImage(Image.open("mimg.png"))
+    mq_root.fquiz_img = mquiz_img
+    mquiz_image = ttk.Label(mq_root, image=mquiz_img)
+    mquiz_image.place(relheight=1, relwidth=1)
+
     # Create the question label
     qs_label = ttk.Label(
         mq_root,
@@ -424,6 +431,11 @@ def bird_quiz():
     y = (screen_height / 2) - (app_height / 2)
 
     bq_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    bquiz_img = ImageTk.PhotoImage(Image.open("birdimg.png"))
+    bq_root.fquiz_img = bquiz_img
+    fquiz_image = ttk.Label(bq_root, image=bquiz_img)
+    fquiz_image.place(relheight=1, relwidth=1)
 
     # Create the question label
     qs_label = ttk.Label(
@@ -609,9 +621,6 @@ def fish_quiz():
 
     # Show the first question
     show_question()  
-
-
-
     
 root = Tk()
 root.title('All About Animals')
@@ -648,4 +657,3 @@ fish_button = Button(root, text="Lesson on Fish", width=20, command=open_fish_le
 fish_button.pack(pady=20)
 
 root.mainloop()
-
