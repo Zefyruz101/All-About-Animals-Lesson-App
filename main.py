@@ -59,21 +59,37 @@ def open_mammals_lesson():
     sizing_menu.add_command(label="14" , ) 
 
     #Lesson content
-    mammal_lesson_content = """
-    Introduction:
-    Mammals are a fascinating group of animals that share some special features. They're warm-blooded, which means they can control their body temperature even when it's cold outside. One of the most unique things about mammals is that they all have hair or fur covering their bodies at some point in their lives. They also give birth to live babies and feed them with milk produced by mammary glands, which is why they're called mammals. From tiny mice to huge whales, mammals come in all shapes and sizes, and they can be found in almost every corner of the world, including your own backyard!
+    mammal_lesson_content = """Mammal Lesson
 
-    Mammal Habitats:
-    Mammals are found in every major habitat around the world. Some mammals, like polar bears and Arctic foxes, live in cold places like the Arctic and Antarctic regions where they have thick fur to keep them warm. Others, like lions and giraffes, live in hot places like the African savannah, where they can find plenty of sunshine and open grasslands to roam. Many mammals, such as squirrels and rabbits, live in forests where they can find trees to climb and hide in. Some even make their homes underground, like moles and groundhogs. No matter where they live, mammals adapt to their habitats to find food, shelter, and safety.
+Introduction:
+Mammals are a fascinating group of animals that share some special features. A mammal is an animal that breathes air, has a backbone, and grows hair at some point during its life. In addition, all female mammals have glands that can produce milk. Mammals are among the most intelligent of all living creatures. Mammals include a wide variety of animals, from cats to humans to whales. There are more than 5,000 species, or kinds, of living mammal. From tiny mice to huge whales, mammals come in all shapes and sizes, and they can be found in almost every corner of the world, including your own backyard!
 
-    Behaviours:
-    Mammals have different behaviours that help them survive and thrive. Young mammals learn important skills, like hunting, from their parents before they grow up and go off alone or stay with their families. Some mammals mark their territory and protect it from others. Certain groups of mammals move to different places at different times of the year. Some mammals take long naps during the winter called hibernation to save energy. When it comes to food, mammals have different diets. Carnivores eat meat, like cats and dogs. Herbivores eat plants, like deer and elephants. And then there are omnivores, like raccoons and bears, who eat both plants and animals. These behaviours help mammals survive in their environments.
+Mammal Habitats:
+Mammals are found in every major habitat around the world. Some mammals, like polar bears and Arctic foxes, live in cold places like the Arctic and Antarctic regions where they have thick fur to keep them warm. Others, like lions and giraffes, live in hot places like the African savannah, where they can find plenty of sunshine and open grasslands to roam. Many mammals, such as squirrels and rabbits, live in forests where they can find trees to climb and hide in. Some even make their homes underground, like moles and groundhogs. No matter where they live, mammals adapt to their habitats to find food, shelter, and safety.
+
+Behaviours:
+Mammals have different behaviours that help them survive and thrive. Young mammals learn important skills, like hunting, from their parents before they grow up and go off alone or stay with their families. Some mammals mark their territory and protect it from others. Certain groups of mammals move to different places at different times of the year. Some mammals take long naps during the winter called hibernation to save energy. When it comes to food, mammals have different diets. Carnivores eat meat, like cats and dogs. Herbivores eat plants, like deer and elephants. And then there are omnivores, like raccoons and bears, who eat both plants and animals. These behaviours help mammals survive in their environments.
+
+Physical Features:
+Mammals are the only animals that produce milk to nourish their young. The female has special glands called mammary glands. After childbirth, the mother’s glands produce milk. The mother feeds the young with this milk until the young are old enough to get food for themselves. All mammals have hair at some stage of development. Hair helps to keep the body warm. The color and pattern of the hair also may help a mammal to blend in with its surroundings. This may keep a mammal hidden from its enemies. In some mammals, hair takes a special form. The hair of porcupines is hardened into sharp spines. A cat’s whiskers are special hairs that are highly sensitive to touch. Mammals are warm-blooded. This means that they are able to keep their body at roughly the same temperature no matter what the surrounding temperature is. This allows mammals to live in a wide range of climates. Finally, mammals have a highly developed brain. The mammal brain is the most complex organ known. This complex brain allows mammals to learn from experience and adapt their behavior.
     """
 
+    # Create a frame to hold the Text widget and the Scrollbar
+    mframe = ttk.Frame(mlesson_root)
+    mframe.pack(expand=True, fill="both", padx=10, pady=10)
+
+    # Create a Scrollbar
+    scrollbar = Scrollbar(mframe)
+    scrollbar.pack(side="right", fill="y")
+
     # Create a Text widget to display the lesson content
-    m_lesson_text = Text(mlesson_root, wrap="word", width=70, height=1)
+    m_lesson_text = Text(mframe, wrap="word", yscrollcommand=scrollbar.set, width=70, height=1)
     m_lesson_text.insert("1.0", mammal_lesson_content)
+    m_lesson_text.config(state=DISABLED)
     m_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
+
+    # Configure the Scrollbar
+    scrollbar.config(command=m_lesson_text.yview)
     
     #Quiz button
     mammal_quiz_button = ttk.Button(mlesson_root, text="Quiz", command=lambda: [mammal_quiz(), mlesson_root.destroy()])
@@ -99,15 +115,36 @@ def open_birds_lesson():
     back_button.pack(side="top", anchor="nw")
 
     #Lesson content
-    bird_lesson_content = '''
+    bird_lesson_content = '''Bird Lesson
 
+Introduction:
+Birds are amazing creatures that fill our skies with colour and song. From pigeons in big cities to penguins in Antarctica, all birds have similar features. They all have wings, though they cannot all fly. All birds also have feathers, in fact, birds are the only living animals that have feathers. Birds have fascinated people throughout history. Many people keep birds as pets or enjoy watching them in the wild or at zoos. In addition, farmers raise poultry for their meat and eggs. Hunters shoot some birds as game. People also use bird feathers in various products and for decoration. From tiny hummingbirds to majestic eagles, birds come in all shapes and sizes, and they live in every corner of the world, from forests to deserts to cities. Let's explore the wonderful world of birds and learn more about these fascinating creatures!
+
+Habitats:
+Birds are found almost everywhere on Earth. There are more than 10,000 species, or types, alive today. Different types have adapted to different habitats, from deserts to rainforests to cities. Many birds migrate or fly long distances between their winter and summer homes. For example, many European birds travel to Africa for the winter. This helps them find enough food year-round.
+
+Behaviours and Feeding Habits:
+Some types of birds live alone most of the time. Other types are more social. They may feed, sleep, fly, and nest in groups called flocks. Birds use many different sounds to communicate with one another. For example, some baby chicks stop moving when their mother produces a danger call. Birds may sing to attract mates. They may also sing to announce that a certain patch of land belongs to them. Birds eat a wide variety of foods. Many types eat insects. Some waterbirds catch fish. Birds of prey catch many kinds of animals, including other birds. Some birds, such as vultures, feed on dead animals and garbage. Many other types eat plant material, such as seeds and fruits.
+
+Physical Features:
+Birds have some amazing physical features that help them fly and survive in their environments. One of the most noticeable things about birds is their feathers. Feathers are not only for flying, but they also keep birds warm and help them attract mates with their bright colors and patterns. Birds have lightweight bones, which make it easier for them to take off and soar through the air. They also have beaks or bills that are shaped differently depending on what they eat. Some birds, like eagles, have sharp, curved beaks for tearing meat, while others, like hummingbirds, have long, slender beaks for sipping nectar from flowers. Birds also have keen eyesight and strong wings that allow them to navigate the skies and find food. These unique physical features make birds one of the most fascinating groups of animals on Earth!
     '''
+# Create a frame to hold the Text widget and the Scrollbar
+    bframe = ttk.Frame(blesson_root)
+    bframe.pack(expand=True, fill="both", padx=10, pady=10)
+
+    # Create a Scrollbar
+    scrollbar = Scrollbar(bframe)
+    scrollbar.pack(side="right", fill="y")
 
     # Create a Text widget to display the lesson content
-    b_lesson_text = Text(blesson_root, wrap="word", width=70, height=1)
+    b_lesson_text = Text(bframe, wrap="word", yscrollcommand=scrollbar.set, width=70, height=1)
     b_lesson_text.insert("1.0", bird_lesson_content)
+    b_lesson_text.config(state=DISABLED)
     b_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
-    
+
+    # Configure the Scrollbar
+    scrollbar.config(command=b_lesson_text.yview)
 
     #Quiz button
     bird_quiz_button = ttk.Button(blesson_root, text="Quiz", command=bird_quiz)
@@ -133,9 +170,34 @@ def open_fish_lesson():
     back_button.pack(side="top", anchor="nw")
 
     #Lesson content
-    fish_lesson = ttk.Label(flesson_root, text="I love fish") 
-    fish_lesson.pack()
+    fish_lesson_content = '''Fish Lesson
 
+Introduction:
+Fish are incredible creatures that live in water all around the world. They come in many shapes, sizes, and colours, from tiny neon-coloured tropical fish to giant whales swimming in the ocean. Fish have special bodies that are designed for life underwater. Some fish, like goldfish and bettas, live in freshwater rivers and lakes, while others, like tuna and sharks, live in the salty ocean. Fish play an important role in our ecosystems and have been around for millions of years. Let's dive into the amazing world of fish and learn more about these fascinating creatures!
+
+Physical Features:
+The many different kinds of fish have some things in common. One of the most important features is their scales, which cover their bodies like armour, protecting them from harm. Fish also have fins that help them steer, balance, and move through the water. Their tails are shaped differently depending on the type of fish; some have forked tails for speed, while others have fan-shaped tails for agility. Fish have gills that allow them to breathe underwater by taking oxygen from the water. Some fish, like sharks, have cartilage instead of bones, which makes them lighter and more flexible. And let's not forget about their colours and patterns, which help them camouflage or attract mates. With these special features, fish are perfectly adapted to their watery homes! Over millions of years, some fish have developed unique features to help them survive. These features are called adaptations. For example, the anglerfish carries its own “fishing rod” to catch other fish. An extended part of the back fin has wormlike pieces of flesh at the tip, which are the “bait.” Anglerfish of the deep sea have bait that lights up to attract victims.
+
+Behaviours:
+Fish have amazing ways of moving and protecting themselves in the water. They swim by moving their bodies and tails sideways, using their fins to balance and steer. Some fish can even shoot water out of their gills to move quickly! The fastest swimmers, like tuna, can zoom through the water at incredible speeds. Many fish have adaptations to help protect them from enemies. For example, some fish have spots near their tail that look like eyes. When an enemy strikes at what it thinks is the head, the fish can escape quickly. Other fish can change colour and pattern to match their surroundings and hide themselves. Most fish eat other, smaller fish. The smallest fish eat tiny water plants and animals called plankton. Plankton drifts with the currents in large numbers.
+    '''
+# Create a frame to hold the Text widget and the Scrollbar
+    fframe = ttk.Frame(flesson_root)
+    fframe.pack(expand=True, fill="both", padx=10, pady=10)
+
+    # Create a Scrollbar
+    scrollbar = Scrollbar(fframe)
+    scrollbar.pack(side="right", fill="y")
+
+    # Create a Text widget to display the lesson content
+    f_lesson_text = Text(fframe, wrap="word", yscrollcommand=scrollbar.set, width=70, height=1)
+    f_lesson_text.insert("1.0", fish_lesson_content)
+    f_lesson_text.config(state=DISABLED)
+    f_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
+
+    # Configure the Scrollbar
+    scrollbar.config(command=f_lesson_text.yview)
+    
     #Quiz button
     fish_quiz_button = ttk.Button(flesson_root, text="Quiz", command=fish_quiz)
     fish_quiz_button.pack()
