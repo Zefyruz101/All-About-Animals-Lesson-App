@@ -60,7 +60,7 @@ def open_mammals_lesson():
     fonts_menu.add_command(label="Century Gothic", command=lambda: update_font("Century Gothic") ) # Setting to Century Gothic
     fonts_menu.add_command(label="Comic Sans MS", command=lambda: update_font("Comic Sans MS") ) # Setting to Comic Sans MS
     fonts_menu.add_command(label="Georgia", command=lambda: update_font("Georgia") ) # Setting to Georgia
-    fonts_menu.add_command(label="Lato", command=lambda: update_font("Lato") ) # Setting to Elephant
+    fonts_menu.add_command(label="Elephant", command=lambda: update_font("Elephant") ) # Setting to Elephant
 
     #Scaling menu of 100% and 150%
     sizing_menu = Menu(my_menu)
