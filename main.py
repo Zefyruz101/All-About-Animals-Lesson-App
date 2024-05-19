@@ -8,6 +8,7 @@ from bquiz_data import bquiz_data
 from fquiz_data import fquiz_data 
 
 current_font = ("Arial", 12)
+current_theme = ('Light Theme')
 
 def update_font(font_family):
     global current_font
@@ -15,6 +16,25 @@ def update_font(font_family):
     m_lesson_text.config(font=current_font)
     b_lesson_text.config(font=current_font)
     f_lesson_text.config(font=current_font)
+
+def update_theme(theme):
+    global current_theme, bg_colour, fg_colour
+    if theme == 'Light Theme':
+        bg_colour = "#ffffff"
+        fg_colour = "#000000"
+    elif theme == 'Dark Theme':
+        bg_colour = "#2e2e2e"
+        fg_colour = "#ffffff"
+    elif theme == 'Sepia':
+        bg_colour = "#f4ecd8"
+        fg_colour = "#5b4636"
+    apply_theme()
+
+def apply_theme():
+    global bg_colour, fg_colour 
+    m_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    b_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    f_lesson_text.config(bg=bg_colour, fg=fg_colour)
 
 def open_mammals_lesson():
     global m_lesson_text
@@ -49,9 +69,9 @@ def open_mammals_lesson():
     #Themes & Options
     themes_menu = Menu(my_menu)
     my_menu.add_cascade(label="Themes", menu=themes_menu)
-    themes_menu.add_command(label='Original Theme')
-    themes_menu.add_command(label='Night Mode')
-    themes_menu.add_command(label="Sepia", )
+    themes_menu.add_command(label='Light Theme', command=lambda: update_theme('Light Theme'))
+    themes_menu.add_command(label='Dark Theme', command=lambda: update_theme('Dark Theme'))
+    themes_menu.add_command(label="Sepia", command=lambda: update_theme('Sepia') )
 
     #Font Type Selection
     fonts_menu = Menu(my_menu)
