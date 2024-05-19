@@ -7,8 +7,18 @@ from mquiz_data import mquiz_data
 from bquiz_data import bquiz_data
 from fquiz_data import fquiz_data 
 
+current_font = ("Arial", 12)
+
+def update_font(font_family):
+    global current_font
+    current_font = (font_family, 12)  # You can adjust the font size here if needed
+    m_lesson_text.config(font=current_font)
+    b_lesson_text.config(font=current_font)
+    f_lesson_text.config(font=current_font)
 
 def open_mammals_lesson():
+    global m_lesson_text
+
     mlesson_root = Toplevel()
     mlesson_root.title('Mammal Lesson')
 
@@ -46,11 +56,11 @@ def open_mammals_lesson():
     #Font Type Selection
     fonts_menu = Menu(my_menu)
     my_menu.add_cascade(label="Fonts", menu=fonts_menu)
-    fonts_menu.add_command(label="Arial", ) # Setting to Arial
-    fonts_menu.add_command(label="Century Gothic", ) # Setting to Century Gothic
-    fonts_menu.add_command(label="Comic Sans MS", ) # Setting to Comic Sans MS
-    fonts_menu.add_command(label="Georgia", ) # Setting to Georgia
-    fonts_menu.add_command(label="Elephant", ) # Setting to Elephant
+    fonts_menu.add_command(label="Arial", command=lambda: update_font("Arial") ) # Setting to Arial
+    fonts_menu.add_command(label="Century Gothic", command=lambda: update_font("Century Gothic") ) # Setting to Century Gothic
+    fonts_menu.add_command(label="Comic Sans MS", command=lambda: update_font("Comic Sans MS") ) # Setting to Comic Sans MS
+    fonts_menu.add_command(label="Georgia", command=lambda: update_font("Georgia") ) # Setting to Georgia
+    fonts_menu.add_command(label="Lato", command=lambda: update_font("Lato") ) # Setting to Elephant
 
     #Scaling menu of 100% and 150%
     sizing_menu = Menu(my_menu)
@@ -86,6 +96,7 @@ Mammals are the only animals that produce milk to nourish their young. The femal
     m_lesson_text = Text(mframe, wrap="word", yscrollcommand=scrollbar.set, width=70, height=1)
     m_lesson_text.insert("1.0", mammal_lesson_content)
     m_lesson_text.config(state=DISABLED)
+    m_lesson_text.config(font=current_font)
     m_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Configure the Scrollbar
@@ -96,6 +107,8 @@ Mammals are the only animals that produce milk to nourish their young. The femal
     mammal_quiz_button.pack()
 
 def open_birds_lesson():
+    global b_lesson_text
+
     blesson_root = Toplevel()
     blesson_root.title('Bird Lesson')
 
@@ -141,6 +154,7 @@ Birds have some amazing physical features that help them fly and survive in thei
     b_lesson_text = Text(bframe, wrap="word", yscrollcommand=scrollbar.set, width=70, height=1)
     b_lesson_text.insert("1.0", bird_lesson_content)
     b_lesson_text.config(state=DISABLED)
+    b_lesson_text.config(font=current_font)
     b_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Configure the Scrollbar
@@ -151,6 +165,8 @@ Birds have some amazing physical features that help them fly and survive in thei
     bird_quiz_button.pack()
 
 def open_fish_lesson():
+    global f_lesson_text
+
     flesson_root = Toplevel()
     flesson_root.title('Fish Lesson')
 
@@ -193,6 +209,7 @@ Fish have amazing ways of moving and protecting themselves in the water. They sw
     f_lesson_text = Text(fframe, wrap="word", yscrollcommand=scrollbar.set, width=70, height=1)
     f_lesson_text.insert("1.0", fish_lesson_content)
     f_lesson_text.config(state=DISABLED)
+    f_lesson_text.config(font=current_font)
     f_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Configure the Scrollbar
