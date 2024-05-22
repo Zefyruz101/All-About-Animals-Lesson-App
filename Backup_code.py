@@ -9,7 +9,7 @@ from fquiz_data import fquiz_data
 
 def open_mammals_lesson():
 
-    main_frame.packforget()
+    main_frame.pack_forget()
     mlesson_frame = Frame(root)
 
     #Back Button
