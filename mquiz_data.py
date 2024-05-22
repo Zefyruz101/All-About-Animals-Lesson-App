@@ -1,4 +1,4 @@
-mquiz_data = [
+quiz_data = [
     {
         "question": "What special feature do all mammals have?",
         "choices": ["Feathers", "Hair or fur", "Scales", "Spots"],
