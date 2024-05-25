@@ -7,64 +7,48 @@ from mquiz_data import mquiz_data
 from bquiz_data import bquiz_data
 from fquiz_data import fquiz_data 
 
-current_font = ("Arial", 12)
-current_theme = ('Light Theme')
+current_text_size = 12
+current_font = "Arial"
 
-def update_font(font_family):
-    global current_font
-    current_font = (font_family, 12)  # You can adjust the font size here if needed
-    m_lesson_text.config(font=current_font)
-    b_lesson_text.config(font=current_font)
-    f_lesson_text.config(font=current_font)
+def main_frame():
+    global main_frame
+    main_frame = Frame(root)   
+    main_frame.pack(expand=True, fill=BOTH)
+    root.config(menu="")
 
-def update_theme(theme):
-    global current_theme, bg_colour, fg_colour
-    if theme == 'Light Theme':
-        bg_colour = "#ffffff"
-        fg_colour = "#000000"
-    elif theme == 'Dark Theme':
-        bg_colour = "#2e2e2e"
-        fg_colour = "#ffffff"
-    elif theme == 'Sepia':
-        bg_colour = "#f4ecd8"
-        fg_colour = "#5b4636"
-    apply_theme()
+    my_img = ImageTk.PhotoImage(Image.open("bgimg.png"))
+    main_frame.my_img = my_img
+    bg_image = ttk.Label(main_frame, image=my_img)
+    bg_image.place(relheight=1, relwidth=1)
 
-def apply_theme():
-    global bg_colour, fg_colour 
-    m_lesson_text.config(bg=bg_colour, fg=fg_colour)
-    b_lesson_text.config(bg=bg_colour, fg=fg_colour)
-    f_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    Program_title_label = ttk.Label(main_frame, text="Click on a lesson to begin!")
+    Program_title_label.pack()
+
+    #Lesson Buttons
+    mammals_button = Button(main_frame, text="Lesson on Mammals", width=20, command=open_mammals_lesson)
+    mammals_button.pack(pady=20)
+
+    birds_button = Button(main_frame, text="Lesson on Birds", width=20, command=open_birds_lesson)
+    birds_button.pack(pady=20)
+
+    fish_button = Button(main_frame, text="Lesson on Fish", width=20, command=open_fish_lesson)
+    fish_button.pack(pady=20)
+
+#----Lesson Functions-------------------------------------------------------------------------------------------------------------------------------------#
 
 def open_mammals_lesson():
-    global m_lesson_text
-
-    mlesson_root = Toplevel()
-    mlesson_root.title('Mammal Lesson')
-
-    app_width = 970
-    app_height = 670
-
-    screen_width = mlesson_root.winfo_screenwidth()
-    screen_height = mlesson_root.winfo_screenheight()
-
-    x = (screen_width / 2) - (app_width / 2)
-    y = (screen_height / 2) - (app_height / 2)
-
-    mlesson_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+    global mlesson_frame, m_lesson_text, current_font, current_text_size
+    main_frame.pack_forget()
+    mlesson_frame = Frame(root)
+    mlesson_frame.pack(expand=True, fill=BOTH)
 
     #Back Button
-    back_button = ttk.Button(mlesson_root, text="Back", command=mlesson_root.destroy)
+    back_button = Button(mlesson_frame, text="Back", command=mainmenu_mlesson)
     back_button.pack(side="top", anchor="nw")
 
-    #File buttons
-    my_menu = Menu(mlesson_root)
-    mlesson_root.config(menu=my_menu)
-
-    #Menu for exiting
-    file_menu = Menu(my_menu)
-    my_menu.add_cascade(label="File", menu=file_menu)
-    file_menu.add_command(label="Exit", command=mlesson_root.destroy)
+    #Menu bar
+    my_menu = Menu(mlesson_frame)
+    root.config(menu=my_menu)
 
     #Themes & Options
     themes_menu = Menu(my_menu)
@@ -82,14 +66,15 @@ def open_mammals_lesson():
     fonts_menu.add_command(label="Calibri", command=lambda: update_font("Calibri") ) # Setting to Calibri
     fonts_menu.add_command(label="Verdana", command=lambda: update_font("Verdana") ) # Setting to Verdana
 
-    #Text Size Menu
+    # Text Size Menu
     sizing_menu = Menu(my_menu)
-    my_menu.add_cascade(label="Sizing", menu= sizing_menu)
-    sizing_menu.add_command(label="12", ) 
-    sizing_menu.add_command(label="13", ) 
-    sizing_menu.add_command(label="14", ) 
-    sizing_menu.add_command(label="15", ) 
-    sizing_menu.add_command(label="16", ) 
+    my_menu.add_cascade(label="Sizing", menu=sizing_menu)
+    sizing_menu.add_command(label="12", command=lambda: update_font_size(12))
+    sizing_menu.add_command(label="13", command=lambda: update_font_size(13))
+    sizing_menu.add_command(label="14", command=lambda: update_font_size(14))
+    sizing_menu.add_command(label="15", command=lambda: update_font_size(15))
+    sizing_menu.add_command(label="16", command=lambda: update_font_size(16)) 
+
     #Lesson content
     mammal_lesson_content = """Mammal Lesson
 
@@ -107,7 +92,7 @@ Mammals are the only animals that produce milk to nourish their young. The femal
     """
 
     # Create a frame to hold the Text widget and the Scrollbar
-    mframe = ttk.Frame(mlesson_root)
+    mframe = ttk.Frame(mlesson_frame)
     mframe.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Create a Scrollbar
@@ -118,36 +103,55 @@ Mammals are the only animals that produce milk to nourish their young. The femal
     m_lesson_text = Text(mframe, wrap="word", yscrollcommand=scrollbar.set, width=70, height=1)
     m_lesson_text.insert("1.0", mammal_lesson_content)
     m_lesson_text.config(state=DISABLED)
-    m_lesson_text.config(font=current_font)
+    m_lesson_text.config(font=(current_font, current_text_size))
     m_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Configure the Scrollbar
     scrollbar.config(command=m_lesson_text.yview)
     
     #Quiz button
-    mammal_quiz_button = ttk.Button(mlesson_root, text="Quiz", command=lambda: [mammal_quiz(), mlesson_root.destroy()])
+    mammal_quiz_button = ttk.Button(mlesson_frame, text="Quiz", command=mammal_quiz)
     mammal_quiz_button.pack()
 
 def open_birds_lesson():
-    global b_lesson_text
-
-    blesson_root = Toplevel()
-    blesson_root.title('Bird Lesson')
-
-    app_width = 970
-    app_height = 670
-
-    screen_width = blesson_root.winfo_screenwidth()
-    screen_height = blesson_root.winfo_screenheight()
-
-    x = (screen_width / 2) - (app_width / 2)
-    y = (screen_height / 2) - (app_height / 2)
-
-    blesson_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+    global blesson_frame, b_lesson_text, current_font, current_text_size
+    main_frame.pack_forget()
+    blesson_frame = Frame(root)
+    blesson_frame.pack(expand=True, fill=BOTH)
 
     #Back Button
-    back_button = ttk.Button(blesson_root, text="Back", command=blesson_root.destroy)
+    back_button = Button(blesson_frame, text="Back", command=mainmenu_blesson)
     back_button.pack(side="top", anchor="nw")
+
+    #Menu bar
+    my_menu = Menu(blesson_frame)
+    root.config(menu=my_menu)
+
+
+    #Themes & Options
+    themes_menu = Menu(my_menu)
+    my_menu.add_cascade(label="Themes", menu=themes_menu)
+    themes_menu.add_command(label='Light Theme', command=lambda: update_theme('Light Theme'))
+    themes_menu.add_command(label='Dark Theme', command=lambda: update_theme('Dark Theme'))
+    themes_menu.add_command(label="Sepia", command=lambda: update_theme('Sepia') )
+
+    #Font Type Selection
+    fonts_menu = Menu(my_menu)
+    my_menu.add_cascade(label="Fonts", menu=fonts_menu)
+    fonts_menu.add_command(label="Arial", command=lambda: update_font("Arial") ) # Setting to Arial
+    fonts_menu.add_command(label="Century Gothic", command=lambda: update_font("Century Gothic") ) # Setting to Century Gothic
+    fonts_menu.add_command(label="Times New Roman", command=lambda: update_font("Times New Roman") ) # Setting to Times New Roman
+    fonts_menu.add_command(label="Calibri", command=lambda: update_font("Calibri") ) # Setting to Calibri
+    fonts_menu.add_command(label="Verdana", command=lambda: update_font("Verdana") ) # Setting to Verdana
+
+    # Text Size Menu
+    sizing_menu = Menu(my_menu)
+    my_menu.add_cascade(label="Sizing", menu=sizing_menu)
+    sizing_menu.add_command(label="12", command=lambda: update_font_size(12))
+    sizing_menu.add_command(label="13", command=lambda: update_font_size(13))
+    sizing_menu.add_command(label="14", command=lambda: update_font_size(14))
+    sizing_menu.add_command(label="15", command=lambda: update_font_size(15))
+    sizing_menu.add_command(label="16", command=lambda: update_font_size(16)) 
 
     #Lesson content
     bird_lesson_content = '''Bird Lesson
@@ -164,8 +168,9 @@ Some types of birds live alone most of the time. Other types are more social. Th
 Physical Features:
 Birds have some amazing physical features that help them fly and survive in their environments. One of the most noticeable things about birds is their feathers. Feathers are not only for flying, but they also keep birds warm and help them attract mates with their bright colors and patterns. Birds have lightweight bones, which make it easier for them to take off and soar through the air. They also have beaks or bills that are shaped differently depending on what they eat. Some birds, like eagles, have sharp, curved beaks for tearing meat, while others, like hummingbirds, have long, slender beaks for sipping nectar from flowers. Birds also have keen eyesight and strong wings that allow them to navigate the skies and find food. These unique physical features make birds one of the most fascinating groups of animals on Earth!
     '''
-# Create a frame to hold the Text widget and the Scrollbar
-    bframe = ttk.Frame(blesson_root)
+
+    # Create a frame to hold the Text widget and the Scrollbar
+    bframe = ttk.Frame(blesson_frame)
     bframe.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Create a Scrollbar
@@ -176,36 +181,55 @@ Birds have some amazing physical features that help them fly and survive in thei
     b_lesson_text = Text(bframe, wrap="word", yscrollcommand=scrollbar.set, width=70, height=1)
     b_lesson_text.insert("1.0", bird_lesson_content)
     b_lesson_text.config(state=DISABLED)
-    b_lesson_text.config(font=current_font)
+    b_lesson_text.config(font=(current_font, current_text_size))
     b_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Configure the Scrollbar
     scrollbar.config(command=b_lesson_text.yview)
-
+    
     #Quiz button
-    bird_quiz_button = ttk.Button(blesson_root, text="Quiz", command=bird_quiz)
+    bird_quiz_button = ttk.Button(blesson_frame, text="Quiz", command=bird_quiz)
     bird_quiz_button.pack()
 
 def open_fish_lesson():
-    global f_lesson_text
+    global flesson_frame, f_lesson_text, current_font, current_text_size
 
-    flesson_root = Toplevel()
-    flesson_root.title('Fish Lesson')
-
-    app_width = 970
-    app_height = 670
-
-    screen_width = flesson_root.winfo_screenwidth()
-    screen_height = flesson_root.winfo_screenheight()
-
-    x = (screen_width / 2) - (app_width / 2)
-    y = (screen_height / 2) - (app_height / 2)
-
-    flesson_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+    main_frame.pack_forget()
+    flesson_frame = Frame(root)
+    flesson_frame.pack(expand=True, fill=BOTH)
 
     #Back Button
-    back_button = ttk.Button(flesson_root, text="Back", command=flesson_root.destroy)
+    back_button = Button(flesson_frame, text="Back", command=mainmenu_flesson)
     back_button.pack(side="top", anchor="nw")
+
+    #Menu bar
+    my_menu = Menu(flesson_frame)
+    root.config(menu=my_menu)
+
+    #Themes & Options
+    themes_menu = Menu(my_menu)
+    my_menu.add_cascade(label="Themes", menu=themes_menu)
+    themes_menu.add_command(label='Light Theme', command=lambda: update_theme('Light Theme'))
+    themes_menu.add_command(label='Dark Theme', command=lambda: update_theme('Dark Theme'))
+    themes_menu.add_command(label="Sepia", command=lambda: update_theme('Sepia') )
+
+    #Font Type Selection
+    fonts_menu = Menu(my_menu)
+    my_menu.add_cascade(label="Fonts", menu=fonts_menu)
+    fonts_menu.add_command(label="Arial", command=lambda: update_font("Arial") ) # Setting to Arial
+    fonts_menu.add_command(label="Century Gothic", command=lambda: update_font("Century Gothic") ) # Setting to Century Gothic
+    fonts_menu.add_command(label="Times New Roman", command=lambda: update_font("Times New Roman") ) # Setting to Times New Roman
+    fonts_menu.add_command(label="Calibri", command=lambda: update_font("Calibri") ) # Setting to Calibri
+    fonts_menu.add_command(label="Verdana", command=lambda: update_font("Verdana") ) # Setting to Verdana
+
+    # Text Size Menu
+    sizing_menu = Menu(my_menu)
+    my_menu.add_cascade(label="Sizing", menu=sizing_menu)
+    sizing_menu.add_command(label="12", command=lambda: update_font_size(12))
+    sizing_menu.add_command(label="13", command=lambda: update_font_size(13))
+    sizing_menu.add_command(label="14", command=lambda: update_font_size(14))
+    sizing_menu.add_command(label="15", command=lambda: update_font_size(15))
+    sizing_menu.add_command(label="16", command=lambda: update_font_size(16)) 
 
     #Lesson content
     fish_lesson_content = '''Fish Lesson
@@ -219,8 +243,9 @@ The many different kinds of fish have some things in common. One of the most imp
 Behaviours:
 Fish have amazing ways of moving and protecting themselves in the water. They swim by moving their bodies and tails sideways, using their fins to balance and steer. Some fish can even shoot water out of their gills to move quickly! The fastest swimmers, like tuna, can zoom through the water at incredible speeds. Many fish have adaptations to help protect them from enemies. For example, some fish have spots near their tail that look like eyes. When an enemy strikes at what it thinks is the head, the fish can escape quickly. Other fish can change colour and pattern to match their surroundings and hide themselves. Most fish eat other, smaller fish. The smallest fish eat tiny water plants and animals called plankton. Plankton drifts with the currents in large numbers.
     '''
-# Create a frame to hold the Text widget and the Scrollbar
-    fframe = ttk.Frame(flesson_root)
+
+    # Create a frame to hold the Text widget and the Scrollbar
+    fframe = ttk.Frame(flesson_frame)
     fframe.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Create a Scrollbar
@@ -231,20 +256,39 @@ Fish have amazing ways of moving and protecting themselves in the water. They sw
     f_lesson_text = Text(fframe, wrap="word", yscrollcommand=scrollbar.set, width=70, height=1)
     f_lesson_text.insert("1.0", fish_lesson_content)
     f_lesson_text.config(state=DISABLED)
-    f_lesson_text.config(font=current_font)
+    f_lesson_text.config(font=(current_font, current_text_size))
     f_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Configure the Scrollbar
     scrollbar.config(command=f_lesson_text.yview)
     
     #Quiz button
-    fish_quiz_button = ttk.Button(flesson_root, text="Quiz", command=fish_quiz)
+    fish_quiz_button = ttk.Button(flesson_frame, text="Quiz", command=fish_quiz)
     fish_quiz_button.pack()
+#----------------------------------------------------------------------------------------------------------------------------------------------#
 
+#---Back Functions--------------------------------------------------------------------------------------------------------------------------------------#
+
+def mainmenu_mlesson():
+    mlesson_frame.pack_forget()
+    main_frame.pack(expand=True, fill=BOTH)
+    root.config(menu="")
+
+def mainmenu_blesson():
+    blesson_frame.pack_forget()
+    main_frame.pack(expand=True, fill=BOTH)
+    root.config(menu="")
+
+def mainmenu_flesson():
+    flesson_frame.pack_forget()
+    main_frame.pack(expand=True, fill=BOTH)
+    root.config(menu="")
+#----------------------------------------------------------------------------------------------------------------------------------------------#
+
+#---Quizzes-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 def mammal_quiz():
-
-    global current_question, score, qs_label, choice_btns, feedback_label, score_label, next_btn
+    global current_question, score, qs_label, choice_btns, feedback_label, question_label, next_btn
     current_question = 0
     score = 0
 
@@ -257,11 +301,14 @@ def mammal_quiz():
         # Display the choices on the buttons
         choices = question["choices"]
         for i in range(4):
-            choice_btns[i].config(text=choices[i], state="normal") # Reset button state
+            choice_btns[i].config(text=choices[i], state="normal")  # Reset button state
 
         # Clear the feedback label and disable the next button
         feedback_label.config(text="")
         next_btn.config(state="disabled")
+
+        # Update the question label
+        question_label.config(text="Question: {}/{}".format(current_question + 1, len(mquiz_data)))
 
     # Function to check the selected answer and provide feedback
     def check_answer(choice):
@@ -274,12 +321,11 @@ def mammal_quiz():
             # Update the score and display it
             global score
             score += 1
-            score_label.config(text="Score: {}/{}".format(score, len(mquiz_data)))
             feedback_label.config(text="Correct!", foreground="green")
         else:
             correct_answer = question["answer"]
             feedback_label.config(text="Incorrect!\nThe correct answer is: {}".format(correct_answer), foreground="red")
-        
+
         # Disable all choice buttons and enable the next button
         for button in choice_btns:
             button.config(state="disabled")
@@ -288,7 +334,7 @@ def mammal_quiz():
     # Function to move to the next question
     def next_question():
         global current_question
-        current_question +=1
+        current_question += 1
 
         if current_question < len(mquiz_data):
             # If there are more questions, show the next question
@@ -351,17 +397,14 @@ def mammal_quiz():
     )
     feedback_label.pack(pady=10)
 
-    # Initialize the score
-    score = 0
-
-    # Create the score label
-    score_label = ttk.Label(
+    # Create question number tracking label
+    question_label = ttk.Label(
         mq_root,
-        text="Score: 0/{}".format(len(mquiz_data)),
+        text="Question: 1/{}".format(len(mquiz_data)),
         anchor="center",
         padding=10
     )
-    score_label.pack(pady=10)
+    question_label.pack(pady=10)
 
     # Create the next button
     next_btn = ttk.Button(
@@ -373,7 +416,8 @@ def mammal_quiz():
     next_btn.pack(pady=10)
 
     # Show the first question
-    show_question()                                          
+    show_question()
+
 
 def bird_quiz():
 
@@ -396,6 +440,9 @@ def bird_quiz():
         feedback_label.config(text="")
         next_btn.config(state="disabled")
 
+        # Update the question label
+        question_label.config(text="Question: {}/{}".format(current_question + 1, len(bquiz_data)))
+
     # Function to check the selected answer and provide feedback
     def check_answer(choice):
         # Get the current question from the quiz_data list
@@ -407,7 +454,6 @@ def bird_quiz():
             # Update the score and display it
             global score
             score += 1
-            score_label.config(text="Score: {}/{}".format(score, len(bquiz_data)))
             feedback_label.config(text="Correct!", foreground="green")
         else:
             correct_answer = question["answer"]
@@ -484,17 +530,14 @@ def bird_quiz():
     )
     feedback_label.pack(pady=10)
 
-    # Initialize the score
-    score = 0
-
-    # Create the score label
-    score_label = ttk.Label(
+    # Create question number tracking label
+    question_label = ttk.Label(
         bq_root,
-        text="Score: 0/{}".format(len(bquiz_data)),
+        text="Question: 1/{}".format(len(mquiz_data)),
         anchor="center",
         padding=10
     )
-    score_label.pack(pady=10)
+    question_label.pack(pady=10)
 
     # Create the next button
     next_btn = ttk.Button(
@@ -529,6 +572,9 @@ def fish_quiz():
         feedback_label.config(text="")
         next_btn.config(state="disabled")
 
+        # Update the question label
+        question_label.config(text="Question: {}/{}".format(current_question + 1, len(mquiz_data)))
+
     # Function to check the selected answer and provide feedback
     def check_answer(choice):
         # Get the current question from the quiz_data list
@@ -540,7 +586,6 @@ def fish_quiz():
             # Update the score and display it
             global score
             score += 1
-            score_label.config(text="Score: {}/{}".format(score, len(fquiz_data)))
             feedback_label.config(text="Correct!", foreground="green")
         else:
             correct_answer = question["answer"]
@@ -618,17 +663,14 @@ def fish_quiz():
     )
     feedback_label.pack(pady=10)
 
-    # Initialize the score
-    score = 0
-
-    # Create the score label
-    score_label = ttk.Label(
+    # Create question number tracking label
+    question_label = ttk.Label(
         fq_root,
-        text="Score: 0/{}".format(len(fquiz_data)),
+        text="Question: 1/{}".format(len(mquiz_data)),
         anchor="center",
         padding=10
     )
-    score_label.pack(pady=10)
+    question_label.pack(pady=10)
 
     # Create the next button
     next_btn = ttk.Button(
@@ -640,8 +682,61 @@ def fish_quiz():
     next_btn.pack(pady=10)
 
     # Show the first question
-    show_question()  
+    show_question()
+#----------------------------------------------------------------------------------------------------------------------------------------------#
+
+#---Accessibility settings-------------------------------------------------------------------------------------------------------------------------------------------#
+
+def update_font(font_family):
+    global current_font
+    current_font = font_family 
+    updated_font = (current_font, current_text_size)  
+    b_lesson_text.config(font=updated_font)
+    f_lesson_text.config(font=updated_font)
+    m_lesson_text.config(font=updated_font)
+
+def update_theme(theme):
+    global current_theme, bg_colour, fg_colour, m_lesson_text, mlesson_frame, b_lesson_text, blesson_frame, f_lesson_text, flesson_frame
     
+    if theme == 'Light Theme':
+        bg_colour = "#ffffff"
+        fg_colour = "#000000"
+    elif theme == 'Dark Theme':
+        bg_colour = "#2e2e2e"
+        fg_colour = "#ffffff"
+    elif theme == 'Sepia':
+        bg_colour = "#f4ecd8"
+        fg_colour = "#5b4636"
+    apply_theme()
+
+def apply_theme():
+    global current_theme, bg_colour, fg_colour, m_lesson_text, mlesson_frame, b_lesson_text, blesson_frame, f_lesson_text, flesson_frame
+    
+    if m_lesson_text:
+        m_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    if mlesson_frame:
+        mlesson_frame.config(bg=bg_colour)
+    if b_lesson_text:
+        b_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    if blesson_frame:
+        blesson_frame.config(bg=bg_colour)
+    if f_lesson_text:
+        f_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    if flesson_frame:
+        flesson_frame.config(bg=bg_colour)
+
+
+def update_font_size(size):
+    global current_font, current_text_size
+    current_text_size = (size)  # size is the new size
+    # Update the text widgets with the new text size and keeping the previous font
+    m_lesson_text.config(font=(current_font, current_text_size))
+    b_lesson_text.config(font=(current_font, current_text_size))
+    f_lesson_text.config(font=(current_font, current_text_size))
+
+#----------------------------------------------------------------------------------------------------------------------------------------------#
+
+
 root = Tk()
 root.title('All About Animals')
 root.resizable(False, False)
@@ -657,23 +752,15 @@ y = (screen_height / 2) - (app_height / 2)
 
 root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
-   
-my_img = ImageTk.PhotoImage(Image.open("bgimg.png"))
-root.my_img = my_img
-bg_image = ttk.Label(image=my_img)
-bg_image.place(relheight=1, relwidth=1)
+style = Style(theme="flatly")
 
-Program_title_label = ttk.Label(root, text="Click on a lesson to begin!")
-Program_title_label.pack()
+m_lesson_text = Text(root)
+mlesson_frame = Frame(root)
+b_lesson_text = Text(root)
+blesson_frame = Frame(root)
+f_lesson_text = Text(root)
+flesson_frame = Frame(root)
 
-#Lesson Buttons
-mammals_button = Button(root, text="Lesson on Mammals", width=20, command=open_mammals_lesson)
-mammals_button.pack(pady=20)
-
-birds_button = Button(root, text="Lesson on Birds", width=20, command=open_birds_lesson)
-birds_button.pack(pady=20)
-
-fish_button = Button(root, text="Lesson on Fish", width=20, command=open_fish_lesson)
-fish_button.pack(pady=20)
+main_frame()
 
 root.mainloop()
