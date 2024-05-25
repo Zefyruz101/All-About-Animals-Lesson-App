@@ -7,8 +7,8 @@ from mquiz_data import mquiz_data
 from bquiz_data import bquiz_data
 from fquiz_data import fquiz_data 
 
-current_font = ("Arial", 12)
-current_theme = ('Light Theme')
+current_text_size = 12
+current_font = "Arial"
 
 def main_frame():
     global main_frame
@@ -37,7 +37,7 @@ def main_frame():
 #----Lesson Functions-------------------------------------------------------------------------------------------------------------------------------------#
 
 def open_mammals_lesson():
-    global mlesson_frame, m_lesson_text, current_font
+    global mlesson_frame, m_lesson_text, current_font, current_text_size
     main_frame.pack_forget()
     mlesson_frame = Frame(root)
     mlesson_frame.pack(expand=True, fill=BOTH)
@@ -103,7 +103,7 @@ Mammals are the only animals that produce milk to nourish their young. The femal
     m_lesson_text = Text(mframe, wrap="word", yscrollcommand=scrollbar.set, width=70, height=1)
     m_lesson_text.insert("1.0", mammal_lesson_content)
     m_lesson_text.config(state=DISABLED)
-    m_lesson_text.config(font=current_font)
+    m_lesson_text.config(font=(current_font, current_text_size))
     m_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Configure the Scrollbar
@@ -114,7 +114,7 @@ Mammals are the only animals that produce milk to nourish their young. The femal
     mammal_quiz_button.pack()
 
 def open_birds_lesson():
-    global blesson_frame, b_lesson_text, current_font
+    global blesson_frame, b_lesson_text, current_font, current_text_size
     main_frame.pack_forget()
     blesson_frame = Frame(root)
     blesson_frame.pack(expand=True, fill=BOTH)
@@ -181,7 +181,7 @@ Birds have some amazing physical features that help them fly and survive in thei
     b_lesson_text = Text(bframe, wrap="word", yscrollcommand=scrollbar.set, width=70, height=1)
     b_lesson_text.insert("1.0", bird_lesson_content)
     b_lesson_text.config(state=DISABLED)
-    b_lesson_text.config(font=current_font)
+    b_lesson_text.config(font=(current_font, current_text_size))
     b_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Configure the Scrollbar
@@ -192,7 +192,7 @@ Birds have some amazing physical features that help them fly and survive in thei
     bird_quiz_button.pack()
 
 def open_fish_lesson():
-    global flesson_frame, f_lesson_text, current_font
+    global flesson_frame, f_lesson_text, current_font, current_text_size
 
     main_frame.pack_forget()
     flesson_frame = Frame(root)
@@ -256,7 +256,7 @@ Fish have amazing ways of moving and protecting themselves in the water. They sw
     f_lesson_text = Text(fframe, wrap="word", yscrollcommand=scrollbar.set, width=70, height=1)
     f_lesson_text.insert("1.0", fish_lesson_content)
     f_lesson_text.config(state=DISABLED)
-    f_lesson_text.config(font=current_font)
+    f_lesson_text.config(font=(current_font, current_text_size))
     f_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Configure the Scrollbar
@@ -288,8 +288,7 @@ def mainmenu_flesson():
 #---Quizzes-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 def mammal_quiz():
-
-    global current_question, score, qs_label, choice_btns, feedback_label, score_label, next_btn
+    global current_question, score, qs_label, choice_btns, feedback_label, question_label, next_btn
     current_question = 0
     score = 0
 
@@ -302,11 +301,14 @@ def mammal_quiz():
         # Display the choices on the buttons
         choices = question["choices"]
         for i in range(4):
-            choice_btns[i].config(text=choices[i], state="normal") # Reset button state
+            choice_btns[i].config(text=choices[i], state="normal")  # Reset button state
 
         # Clear the feedback label and disable the next button
         feedback_label.config(text="")
         next_btn.config(state="disabled")
+
+        # Update the question label
+        question_label.config(text="Question: {}/{}".format(current_question + 1, len(mquiz_data)))
 
     # Function to check the selected answer and provide feedback
     def check_answer(choice):
@@ -319,12 +321,11 @@ def mammal_quiz():
             # Update the score and display it
             global score
             score += 1
-            score_label.config(text="Score: {}/{}".format(score, len(mquiz_data)))
             feedback_label.config(text="Correct!", foreground="green")
         else:
             correct_answer = question["answer"]
             feedback_label.config(text="Incorrect!\nThe correct answer is: {}".format(correct_answer), foreground="red")
-        
+
         # Disable all choice buttons and enable the next button
         for button in choice_btns:
             button.config(state="disabled")
@@ -333,7 +334,7 @@ def mammal_quiz():
     # Function to move to the next question
     def next_question():
         global current_question
-        current_question +=1
+        current_question += 1
 
         if current_question < len(mquiz_data):
             # If there are more questions, show the next question
@@ -396,17 +397,14 @@ def mammal_quiz():
     )
     feedback_label.pack(pady=10)
 
-    # Initialize the score
-    score = 0
-
-    # Create the score label
-    score_label = ttk.Label(
+    # Create question number tracking label
+    question_label = ttk.Label(
         mq_root,
-        text="Score: 0/{}".format(len(mquiz_data)),
+        text="Question: 1/{}".format(len(mquiz_data)),
         anchor="center",
         padding=10
     )
-    score_label.pack(pady=10)
+    question_label.pack(pady=10)
 
     # Create the next button
     next_btn = ttk.Button(
@@ -419,6 +417,7 @@ def mammal_quiz():
 
     # Show the first question
     show_question()
+
 
 def bird_quiz():
 
@@ -441,6 +440,9 @@ def bird_quiz():
         feedback_label.config(text="")
         next_btn.config(state="disabled")
 
+        # Update the question label
+        question_label.config(text="Question: {}/{}".format(current_question + 1, len(bquiz_data)))
+
     # Function to check the selected answer and provide feedback
     def check_answer(choice):
         # Get the current question from the quiz_data list
@@ -452,7 +454,6 @@ def bird_quiz():
             # Update the score and display it
             global score
             score += 1
-            score_label.config(text="Score: {}/{}".format(score, len(bquiz_data)))
             feedback_label.config(text="Correct!", foreground="green")
         else:
             correct_answer = question["answer"]
@@ -529,17 +530,14 @@ def bird_quiz():
     )
     feedback_label.pack(pady=10)
 
-    # Initialize the score
-    score = 0
-
-    # Create the score label
-    score_label = ttk.Label(
+    # Create question number tracking label
+    question_label = ttk.Label(
         bq_root,
-        text="Score: 0/{}".format(len(bquiz_data)),
+        text="Question: 1/{}".format(len(mquiz_data)),
         anchor="center",
         padding=10
     )
-    score_label.pack(pady=10)
+    question_label.pack(pady=10)
 
     # Create the next button
     next_btn = ttk.Button(
@@ -574,6 +572,9 @@ def fish_quiz():
         feedback_label.config(text="")
         next_btn.config(state="disabled")
 
+        # Update the question label
+        question_label.config(text="Question: {}/{}".format(current_question + 1, len(mquiz_data)))
+
     # Function to check the selected answer and provide feedback
     def check_answer(choice):
         # Get the current question from the quiz_data list
@@ -585,7 +586,6 @@ def fish_quiz():
             # Update the score and display it
             global score
             score += 1
-            score_label.config(text="Score: {}/{}".format(score, len(fquiz_data)))
             feedback_label.config(text="Correct!", foreground="green")
         else:
             correct_answer = question["answer"]
@@ -663,17 +663,14 @@ def fish_quiz():
     )
     feedback_label.pack(pady=10)
 
-    # Initialize the score
-    score = 0
-
-    # Create the score label
-    score_label = ttk.Label(
+    # Create question number tracking label
+    question_label = ttk.Label(
         fq_root,
-        text="Score: 0/{}".format(len(fquiz_data)),
+        text="Question: 1/{}".format(len(mquiz_data)),
         anchor="center",
         padding=10
     )
-    score_label.pack(pady=10)
+    question_label.pack(pady=10)
 
     # Create the next button
     next_btn = ttk.Button(
@@ -692,13 +689,15 @@ def fish_quiz():
 
 def update_font(font_family):
     global current_font
-    current_font = (font_family, 12)  # You can adjust the font size here if needed
-    m_lesson_text.config(font=current_font)
-    b_lesson_text.config(font=current_font)
-    f_lesson_text.config(font=current_font)
+    current_font = font_family 
+    updated_font = (current_font, current_text_size)  # You can adjust the font size here if needed
+    m_lesson_text.config(font=updated_font)
+    b_lesson_text.config(font=updated_font)
+    f_lesson_text.config(font=updated_font)
 
 def update_theme(theme):
-    global current_theme, bg_colour, fg_colour
+    global current_theme, bg_colour, fg_colour, m_lesson_text, mlesson_frame, b_lesson_text, blesson_frame, f_lesson_text, flesson_frame
+    
     if theme == 'Light Theme':
         bg_colour = "#ffffff"
         fg_colour = "#000000"
@@ -708,22 +707,22 @@ def update_theme(theme):
     elif theme == 'Sepia':
         bg_colour = "#f4ecd8"
         fg_colour = "#5b4636"
-    apply_theme()
-
-def apply_theme():
-    global bg_colour, fg_colour 
+    
     m_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    mlesson_frame.config(bg=bg_colour)
     b_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    blesson_frame.config(bg=bg_colour)
     f_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    flesson_frame.config(bg=bg_colour)
+
 
 def update_font_size(size):
-    global current_font
-    # Create a new font object with the updated size
-    new_font = (current_font[0], size)  # current_font[0] is the font family, size is the new size
-    # Update the text widgets with the new font
-    m_lesson_text.config(font=new_font)
-    b_lesson_text.config(font=new_font)
-    f_lesson_text.config(font=new_font)
+    global current_font, current_text_size
+    current_text_size = (size)  # size is the new size
+    # Update the text widgets with the new text size and keeping the previous font
+    m_lesson_text.config(font=(current_font, current_text_size))
+    b_lesson_text.config(font=(current_font, current_text_size))
+    f_lesson_text.config(font=(current_font, current_text_size))
 
 #----------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -742,6 +741,8 @@ x = (screen_width / 2) - (app_width / 2)
 y = (screen_height / 2) - (app_height / 2)
 
 root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+style = Style(theme="flatly")
 
 main_frame()
 
