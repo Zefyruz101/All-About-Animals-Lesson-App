@@ -690,10 +690,10 @@ def fish_quiz():
 def update_font(font_family):
     global current_font
     current_font = font_family 
-    updated_font = (current_font, current_text_size)  # You can adjust the font size here if needed
-    m_lesson_text.config(font=updated_font)
+    updated_font = (current_font, current_text_size)  
     b_lesson_text.config(font=updated_font)
     f_lesson_text.config(font=updated_font)
+    m_lesson_text.config(font=updated_font)
 
 def update_theme(theme):
     global current_theme, bg_colour, fg_colour, m_lesson_text, mlesson_frame, b_lesson_text, blesson_frame, f_lesson_text, flesson_frame
@@ -707,13 +707,23 @@ def update_theme(theme):
     elif theme == 'Sepia':
         bg_colour = "#f4ecd8"
         fg_colour = "#5b4636"
+    apply_theme()
+
+def apply_theme():
+    global current_theme, bg_colour, fg_colour, m_lesson_text, mlesson_frame, b_lesson_text, blesson_frame, f_lesson_text, flesson_frame
     
-    m_lesson_text.config(bg=bg_colour, fg=fg_colour)
-    mlesson_frame.config(bg=bg_colour)
-    b_lesson_text.config(bg=bg_colour, fg=fg_colour)
-    blesson_frame.config(bg=bg_colour)
-    f_lesson_text.config(bg=bg_colour, fg=fg_colour)
-    flesson_frame.config(bg=bg_colour)
+    if m_lesson_text:
+        m_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    if mlesson_frame:
+        mlesson_frame.config(bg=bg_colour)
+    if b_lesson_text:
+        b_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    if blesson_frame:
+        blesson_frame.config(bg=bg_colour)
+    if f_lesson_text:
+        f_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    if flesson_frame:
+        flesson_frame.config(bg=bg_colour)
 
 
 def update_font_size(size):
@@ -743,6 +753,13 @@ y = (screen_height / 2) - (app_height / 2)
 root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
 style = Style(theme="flatly")
+
+m_lesson_text = Text(root)
+mlesson_frame = Frame(root)
+b_lesson_text = Text(root)
+blesson_frame = Frame(root)
+f_lesson_text = Text(root)
+flesson_frame = Frame(root)
 
 main_frame()
 
