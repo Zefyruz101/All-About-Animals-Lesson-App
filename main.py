@@ -14,7 +14,7 @@ current_theme = 'Light Theme'
 bg_colour = "#ffffff"
 fg_colour = "#000000"
 
-def main_frame():
+def main_frame(): #Main menu of program
     global main_frame
     main_frame = Frame(root)   
     main_frame.pack(expand=True, fill=BOTH)
