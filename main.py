@@ -9,6 +9,9 @@ from fquiz_data import fquiz_data
 
 current_text_size = 12
 current_font = "Arial"
+current_theme = 'Light Theme'
+bg_colour = "#ffffff"
+fg_colour = "#000000"
 
 def main_frame():
     global main_frame
@@ -37,9 +40,10 @@ def main_frame():
 #----Lesson Functions-------------------------------------------------------------------------------------------------------------------------------------#
 
 def open_mammals_lesson():
-    global mlesson_frame, m_lesson_text, current_font, current_text_size
+    global mlesson_frame, m_lesson_text, current_font, current_text_size, current_theme, bg_colour, fg_colour
     main_frame.pack_forget()
     mlesson_frame = Frame(root)
+    mlesson_frame.config(bg=bg_colour)
     mlesson_frame.pack(expand=True, fill=BOTH)
 
     #Back Button
@@ -104,6 +108,7 @@ Mammals are the only animals that produce milk to nourish their young. The femal
     m_lesson_text.insert("1.0", mammal_lesson_content)
     m_lesson_text.config(state=DISABLED)
     m_lesson_text.config(font=(current_font, current_text_size))
+    m_lesson_text.config(bg=bg_colour, fg=fg_colour)
     m_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Configure the Scrollbar
@@ -114,9 +119,10 @@ Mammals are the only animals that produce milk to nourish their young. The femal
     mammal_quiz_button.pack()
 
 def open_birds_lesson():
-    global blesson_frame, b_lesson_text, current_font, current_text_size
+    global blesson_frame, b_lesson_text, current_font, current_text_size, current_theme, bg_colour, fg_colour
     main_frame.pack_forget()
     blesson_frame = Frame(root)
+    blesson_frame.config(bg=bg_colour)
     blesson_frame.pack(expand=True, fill=BOTH)
 
     #Back Button
@@ -182,6 +188,7 @@ Birds have some amazing physical features that help them fly and survive in thei
     b_lesson_text.insert("1.0", bird_lesson_content)
     b_lesson_text.config(state=DISABLED)
     b_lesson_text.config(font=(current_font, current_text_size))
+    b_lesson_text.config(bg=bg_colour, fg=fg_colour)
     b_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Configure the Scrollbar
@@ -192,10 +199,11 @@ Birds have some amazing physical features that help them fly and survive in thei
     bird_quiz_button.pack()
 
 def open_fish_lesson():
-    global flesson_frame, f_lesson_text, current_font, current_text_size
+    global flesson_frame, f_lesson_text, current_font, current_text_size, current_theme, bg_colour, fg_colour
 
     main_frame.pack_forget()
     flesson_frame = Frame(root)
+    flesson_frame.config(bg=bg_colour)
     flesson_frame.pack(expand=True, fill=BOTH)
 
     #Back Button
@@ -257,6 +265,7 @@ Fish have amazing ways of moving and protecting themselves in the water. They sw
     f_lesson_text.insert("1.0", fish_lesson_content)
     f_lesson_text.config(state=DISABLED)
     f_lesson_text.config(font=(current_font, current_text_size))
+    f_lesson_text.config(bg=bg_colour, fg=fg_colour)
     f_lesson_text.pack(expand=True, fill="both", padx=10, pady=10)
 
     # Configure the Scrollbar
@@ -698,6 +707,7 @@ def update_font(font_family):
 def update_theme(theme):
     global current_theme, bg_colour, fg_colour, m_lesson_text, mlesson_frame, b_lesson_text, blesson_frame, f_lesson_text, flesson_frame
     
+    current_theme = (theme)
     if theme == 'Light Theme':
         bg_colour = "#ffffff"
         fg_colour = "#000000"
@@ -712,18 +722,12 @@ def update_theme(theme):
 def apply_theme():
     global current_theme, bg_colour, fg_colour, m_lesson_text, mlesson_frame, b_lesson_text, blesson_frame, f_lesson_text, flesson_frame
     
-    if m_lesson_text:
-        m_lesson_text.config(bg=bg_colour, fg=fg_colour)
-    if mlesson_frame:
-        mlesson_frame.config(bg=bg_colour)
-    if b_lesson_text:
-        b_lesson_text.config(bg=bg_colour, fg=fg_colour)
-    if blesson_frame:
-        blesson_frame.config(bg=bg_colour)
-    if f_lesson_text:
-        f_lesson_text.config(bg=bg_colour, fg=fg_colour)
-    if flesson_frame:
-        flesson_frame.config(bg=bg_colour)
+    m_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    mlesson_frame.config(bg=bg_colour)
+    b_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    blesson_frame.config(bg=bg_colour)
+    f_lesson_text.config(bg=bg_colour, fg=fg_colour)
+    flesson_frame.config(bg=bg_colour)
 
 
 def update_font_size(size):
