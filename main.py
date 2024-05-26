@@ -24,17 +24,17 @@ def main_frame():
     bg_image = ttk.Label(main_frame, image=my_img)
     bg_image.place(relheight=1, relwidth=1)
 
-    Program_title_label = ttk.Label(main_frame, text="Click on a lesson to begin!")
+    Program_title_label = Label(main_frame, text="Click on a lesson to begin!", font=("Helvetica", 17))
     Program_title_label.pack()
 
     #Lesson Buttons
-    mammals_button = Button(main_frame, text="Lesson on Mammals", width=20, command=open_mammals_lesson)
+    mammals_button = Button(main_frame, text="Lesson on Mammals",font=("Arial Bold", 11), width=20, command=open_mammals_lesson)
     mammals_button.pack(pady=20)
 
-    birds_button = Button(main_frame, text="Lesson on Birds", width=20, command=open_birds_lesson)
+    birds_button = Button(main_frame, text="Lesson on Birds",font=("Arial Bold", 11), width=20, command=open_birds_lesson)
     birds_button.pack(pady=20)
 
-    fish_button = Button(main_frame, text="Lesson on Fish", width=20, command=open_fish_lesson)
+    fish_button = Button(main_frame, text="Lesson on Fish",font=("Arial Bold", 11), width=20, command=open_fish_lesson)
     fish_button.pack(pady=20)
 
 #----Lesson Functions-------------------------------------------------------------------------------------------------------------------------------------#
@@ -47,7 +47,7 @@ def open_mammals_lesson():
     mlesson_frame.pack(expand=True, fill=BOTH)
 
     #Back Button
-    back_button = Button(mlesson_frame, text="Back", command=mainmenu_mlesson)
+    back_button = Button(mlesson_frame, text="Back",font=("Arial Bold", 12), command=mainmenu_mlesson)
     back_button.pack(side="top", anchor="nw")
 
     #Menu bar
@@ -77,7 +77,11 @@ def open_mammals_lesson():
     sizing_menu.add_command(label="13", command=lambda: update_font_size(13))
     sizing_menu.add_command(label="14", command=lambda: update_font_size(14))
     sizing_menu.add_command(label="15", command=lambda: update_font_size(15))
-    sizing_menu.add_command(label="16", command=lambda: update_font_size(16)) 
+    sizing_menu.add_command(label="16", command=lambda: update_font_size(16))
+    sizing_menu.add_command(label="17", command=lambda: update_font_size(17))
+    sizing_menu.add_command(label="18", command=lambda: update_font_size(18))
+    sizing_menu.add_command(label="19", command=lambda: update_font_size(19))
+    sizing_menu.add_command(label="20", command=lambda: update_font_size(20)) 
 
     #Lesson content
     mammal_lesson_content = """Mammal Lesson
@@ -115,7 +119,7 @@ Mammals are the only animals that produce milk to nourish their young. The femal
     scrollbar.config(command=m_lesson_text.yview)
     
     #Quiz button
-    mammal_quiz_button = ttk.Button(mlesson_frame, text="Quiz", command=mammal_quiz)
+    mammal_quiz_button = Button(mlesson_frame, text="Quiz",font=("Arial Bold", 14), command=mammal_quiz)
     mammal_quiz_button.pack()
 
 def open_birds_lesson():
@@ -126,7 +130,7 @@ def open_birds_lesson():
     blesson_frame.pack(expand=True, fill=BOTH)
 
     #Back Button
-    back_button = Button(blesson_frame, text="Back", command=mainmenu_blesson)
+    back_button = Button(blesson_frame, text="Back",font=("Arial Bold", 12), command=mainmenu_blesson)
     back_button.pack(side="top", anchor="nw")
 
     #Menu bar
@@ -157,7 +161,11 @@ def open_birds_lesson():
     sizing_menu.add_command(label="13", command=lambda: update_font_size(13))
     sizing_menu.add_command(label="14", command=lambda: update_font_size(14))
     sizing_menu.add_command(label="15", command=lambda: update_font_size(15))
-    sizing_menu.add_command(label="16", command=lambda: update_font_size(16)) 
+    sizing_menu.add_command(label="16", command=lambda: update_font_size(16))
+    sizing_menu.add_command(label="17", command=lambda: update_font_size(17))
+    sizing_menu.add_command(label="18", command=lambda: update_font_size(18))
+    sizing_menu.add_command(label="19", command=lambda: update_font_size(19))
+    sizing_menu.add_command(label="20", command=lambda: update_font_size(20))  
 
     #Lesson content
     bird_lesson_content = '''Bird Lesson
@@ -195,7 +203,7 @@ Birds have some amazing physical features that help them fly and survive in thei
     scrollbar.config(command=b_lesson_text.yview)
     
     #Quiz button
-    bird_quiz_button = ttk.Button(blesson_frame, text="Quiz", command=bird_quiz)
+    bird_quiz_button = Button(blesson_frame, text="Quiz",font=("Arial Bold", 14), command=bird_quiz)
     bird_quiz_button.pack()
 
 def open_fish_lesson():
@@ -207,7 +215,7 @@ def open_fish_lesson():
     flesson_frame.pack(expand=True, fill=BOTH)
 
     #Back Button
-    back_button = Button(flesson_frame, text="Back", command=mainmenu_flesson)
+    back_button = Button(flesson_frame, text="Back",font=("Arial Bold", 12), command=mainmenu_flesson)
     back_button.pack(side="top", anchor="nw")
 
     #Menu bar
@@ -237,7 +245,11 @@ def open_fish_lesson():
     sizing_menu.add_command(label="13", command=lambda: update_font_size(13))
     sizing_menu.add_command(label="14", command=lambda: update_font_size(14))
     sizing_menu.add_command(label="15", command=lambda: update_font_size(15))
-    sizing_menu.add_command(label="16", command=lambda: update_font_size(16)) 
+    sizing_menu.add_command(label="16", command=lambda: update_font_size(16))
+    sizing_menu.add_command(label="17", command=lambda: update_font_size(17))
+    sizing_menu.add_command(label="18", command=lambda: update_font_size(18))
+    sizing_menu.add_command(label="19", command=lambda: update_font_size(19))
+    sizing_menu.add_command(label="20", command=lambda: update_font_size(20))  
 
     #Lesson content
     fish_lesson_content = '''Fish Lesson
@@ -272,7 +284,7 @@ Fish have amazing ways of moving and protecting themselves in the water. They sw
     scrollbar.config(command=f_lesson_text.yview)
     
     #Quiz button
-    fish_quiz_button = ttk.Button(flesson_frame, text="Quiz", command=fish_quiz)
+    fish_quiz_button = Button(flesson_frame, text="Quiz",font=("Arial Bold", 14), command=fish_quiz)
     fish_quiz_button.pack()
 #----------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -297,7 +309,7 @@ def mainmenu_flesson():
 #---Quizzes-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 def mammal_quiz():
-    global current_question, score, qs_label, choice_btns, feedback_label, question_label, next_btn
+    global current_question, score, qs_label, choice_btns, feedback_label, question_label, next_btn, m_lesson_text, mlesson_frame, current_theme, bg_colour, fg_colour
     current_question = 0
     score = 0
 
@@ -356,12 +368,13 @@ def mammal_quiz():
 
     # Create the quiz window
     mq_root = Toplevel()
+    mq_root.resizable(False, False)
     mq_root.title("Mammal Quiz")
     style = Style(theme="flatly")
 
     # Configure the font size for the question and choice buttons
-    style.configure("TLabel", font=("Helvetica", 20))
-    style.configure("TButton", font=("Helvetica", 16))
+    style.configure("TLabel", font=("Arial", 20))
+    style.configure("TButton", font=("Arial", 16))
 
     app_width = 970
     app_height = 670
@@ -423,6 +436,8 @@ def mammal_quiz():
         state="disabled"
     )
     next_btn.pack(pady=10)
+
+    apply_theme()
 
     # Show the first question
     show_question()
@@ -489,12 +504,13 @@ def bird_quiz():
 
     # Create the quiz window
     bq_root = Toplevel()
+    bq_root.resizable(False, False)
     bq_root.title("Bird Quiz")
     style = Style(theme="flatly")
 
     # Configure the font size for the question and choice buttons
-    style.configure("TLabel", font=("Helvetica", 20))
-    style.configure("TButton", font=("Helvetica", 16))
+    style.configure("TLabel", font=("Arial", 20))
+    style.configure("TButton", font=("Arial", 16))
 
     app_width = 970
     app_height = 670
@@ -556,6 +572,8 @@ def bird_quiz():
         state="disabled"
     )
     next_btn.pack(pady=10)
+
+    apply_theme()
 
     # Show the first question
     show_question()  
@@ -621,13 +639,14 @@ def fish_quiz():
 
     # Create the quiz window
     fq_root = Toplevel()
+    fq_root.resizable(False, False)
     fq_root.title("Fish Quiz")
     fq_root.resizable(False, False)
     style = Style(theme="flatly")
 
     # Configure the font size for the question and choice buttons
-    style.configure("TLabel", font=("Helvetica", 20))
-    style.configure("TButton", font=("Helvetica", 16))
+    style.configure("TLabel", font=("Arial", 20))
+    style.configure("TButton", font=("Arial", 16))
 
     app_width = 970
     app_height = 670
@@ -689,6 +708,8 @@ def fish_quiz():
         state="disabled"
     )
     next_btn.pack(pady=10)
+
+    apply_theme()
 
     # Show the first question
     show_question()
@@ -757,6 +778,7 @@ y = (screen_height / 2) - (app_height / 2)
 root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
 style = Style(theme="flatly")
+
 
 m_lesson_text = Text(root)
 mlesson_frame = Frame(root)
