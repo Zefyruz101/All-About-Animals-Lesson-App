@@ -7,6 +7,7 @@ from mquiz_data import mquiz_data
 from bquiz_data import bquiz_data
 from fquiz_data import fquiz_data 
 
+#Initialising Global Variables
 current_text_size = 12
 current_font = "Arial"
 current_theme = 'Light Theme'
@@ -19,7 +20,7 @@ def main_frame():
     main_frame.pack(expand=True, fill=BOTH)
     root.config(menu="")
 
-    my_img = ImageTk.PhotoImage(Image.open("bgimg.png"))
+    my_img = ImageTk.PhotoImage(Image.open("bgimg.png")) #Setting the Background Image for the main menu
     main_frame.my_img = my_img
     bg_image = ttk.Label(main_frame, image=my_img)
     bg_image.place(relheight=1, relwidth=1)
@@ -290,17 +291,17 @@ Fish have amazing ways of moving and protecting themselves in the water. They sw
 
 #---Back Functions--------------------------------------------------------------------------------------------------------------------------------------#
 
-def mainmenu_mlesson():
+def mainmenu_mlesson(): #Function to Return From Mammal Lesson to Main Menu
     mlesson_frame.pack_forget()
     main_frame.pack(expand=True, fill=BOTH)
     root.config(menu="")
 
-def mainmenu_blesson():
+def mainmenu_blesson(): #Function to Return From Bird Lesson to Main Menu
     blesson_frame.pack_forget()
     main_frame.pack(expand=True, fill=BOTH)
     root.config(menu="")
 
-def mainmenu_flesson():
+def mainmenu_flesson(): #Function to Return From Fish Lesson to Main Menu
     flesson_frame.pack_forget()
     main_frame.pack(expand=True, fill=BOTH)
     root.config(menu="")
@@ -376,6 +377,7 @@ def mammal_quiz():
     style.configure("TLabel", font=("Arial", 20))
     style.configure("TButton", font=("Arial", 16))
 
+    #Code to center the quiz to the middle of the screen
     app_width = 970
     app_height = 670
 
@@ -387,7 +389,7 @@ def mammal_quiz():
 
     mq_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
-    mquiz_img = ImageTk.PhotoImage(Image.open("mimg.png"))
+    mquiz_img = ImageTk.PhotoImage(Image.open("mimg.png")) #Setting background image for the quiz
     mq_root.fquiz_img = mquiz_img
     mquiz_image = ttk.Label(mq_root, image=mquiz_img)
     mquiz_image.place(relheight=1, relwidth=1)
@@ -512,6 +514,7 @@ def bird_quiz():
     style.configure("TLabel", font=("Arial", 20))
     style.configure("TButton", font=("Arial", 16))
 
+    #Code to center the quiz to the middle of the screen
     app_width = 970
     app_height = 670
 
@@ -523,7 +526,7 @@ def bird_quiz():
 
     bq_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
-    bquiz_img = ImageTk.PhotoImage(Image.open("birdimg.png"))
+    bquiz_img = ImageTk.PhotoImage(Image.open("birdimg.png")) #Setting background image for the quiz
     bq_root.fquiz_img = bquiz_img
     fquiz_image = ttk.Label(bq_root, image=bquiz_img)
     fquiz_image.place(relheight=1, relwidth=1)
@@ -648,6 +651,7 @@ def fish_quiz():
     style.configure("TLabel", font=("Arial", 20))
     style.configure("TButton", font=("Arial", 16))
 
+    #Code to center the quiz to the middle of the screen
     app_width = 970
     app_height = 670
 
@@ -659,7 +663,7 @@ def fish_quiz():
 
     fq_root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
-    fquiz_img = ImageTk.PhotoImage(Image.open("fishimg.png"))
+    fquiz_img = ImageTk.PhotoImage(Image.open("fishimg.png")) #Setting background image for the quiz
     fq_root.fquiz_img = fquiz_img
     fquiz_image = ttk.Label(fq_root, image=fquiz_img)
     fquiz_image.place(relheight=1, relwidth=1)
@@ -769,6 +773,7 @@ root.resizable(False, False)
 app_width = 970
 app_height = 670
 
+#Centering the Program
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 
@@ -779,7 +784,7 @@ root.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
 style = Style(theme="flatly")
 
-
+#Initialising Widgets
 m_lesson_text = Text(root)
 mlesson_frame = Frame(root)
 b_lesson_text = Text(root)
@@ -787,6 +792,7 @@ blesson_frame = Frame(root)
 f_lesson_text = Text(root)
 flesson_frame = Frame(root)
 
+#Opening the Main Menu
 main_frame()
 
 root.mainloop()
