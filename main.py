@@ -688,7 +688,6 @@ def apply_theme():
     f_lesson_text.config(bg=bg_colour, fg=fg_colour)
     flesson_frame.config(bg=bg_colour)
 
-
 def update_font_size(size):
     global current_font, current_text_size
     current_text_size = (size)  # size is the new size
