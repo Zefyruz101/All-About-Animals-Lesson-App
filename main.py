@@ -120,7 +120,7 @@ Mammals are the only animals that produce milk to nourish their young. The femal
     scrollbar.config(command=m_lesson_text.yview)
     
     #Quiz button
-    mammal_quiz_button = Button(mlesson_frame, text="Quiz",font=("Arial Bold", 14), command=mammal_quiz)
+    mammal_quiz_button = Button(mlesson_frame, text="Quiz",font=("Arial Bold", 14), height=2, width=7, command=mammal_quiz)
     mammal_quiz_button.pack()
 
 def open_birds_lesson():
@@ -204,7 +204,7 @@ Birds have some amazing physical features that help them fly and survive in thei
     scrollbar.config(command=b_lesson_text.yview)
     
     #Quiz button
-    bird_quiz_button = Button(blesson_frame, text="Quiz",font=("Arial Bold", 14), command=bird_quiz)
+    bird_quiz_button = Button(blesson_frame, text="Quiz",font=("Arial Bold", 14), height=2, width=7, command=bird_quiz)
     bird_quiz_button.pack()
 
 def open_fish_lesson():
@@ -285,7 +285,7 @@ Fish have amazing ways of moving and protecting themselves in the water. They sw
     scrollbar.config(command=f_lesson_text.yview)
     
     #Quiz button
-    fish_quiz_button = Button(flesson_frame, text="Quiz",font=("Arial Bold", 14), command=fish_quiz)
+    fish_quiz_button = Button(flesson_frame, text="Quiz",font=("Arial Bold", 14), height=2, width=7, command=fish_quiz)
     fish_quiz_button.pack()
 #----------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -794,5 +794,4 @@ flesson_frame = Frame(root)
 
 #Opening the Main Menu
 main_frame()
-
 root.mainloop()
