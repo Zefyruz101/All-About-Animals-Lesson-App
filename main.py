@@ -395,48 +395,26 @@ def mammal_quiz():
     mquiz_image.place(relheight=1, relwidth=1)
 
     # Create the question label
-    qs_label = ttk.Label(
-        mq_root,
-        anchor="center",
-        wraplength=500,
-        padding=10
-    )
+    qs_label = ttk.Label(mq_root, anchor="center", wraplength=500, padding=10)
     qs_label.pack(pady=10)
 
     # Create the choice buttons
     choice_btns = []
     for i in range(4):
-        button = ttk.Button(
-            mq_root,
-            command=lambda i=i: check_answer(i)
-        )
+        button = ttk.Button(mq_root, command=lambda i=i: check_answer(i))
         button.pack(pady=5)
         choice_btns.append(button)
 
     # Create the feedback label
-    feedback_label = ttk.Label(
-        mq_root,
-        anchor="center",
-        padding=10
-    )
+    feedback_label = ttk.Label(mq_root, anchor="center", padding=10)
     feedback_label.pack(pady=10)
 
     # Create question number tracking label
-    question_label = ttk.Label(
-        mq_root,
-        text="Question: 1/{}".format(len(mquiz_data)),
-        anchor="center",
-        padding=10
-    )
+    question_label = ttk.Label(mq_root, text="Question: 1/{}".format(len(mquiz_data)), anchor="center", padding=10)
     question_label.pack(pady=10)
 
     # Create the next button
-    next_btn = ttk.Button(
-        mq_root,
-        text="Next",
-        command=next_question,
-        state="disabled"
-    )
+    next_btn = ttk.Button(mq_root, text="Next", command=next_question, state="disabled")
     next_btn.pack(pady=10)
 
     apply_theme()
@@ -532,48 +510,26 @@ def bird_quiz():
     fquiz_image.place(relheight=1, relwidth=1)
 
     # Create the question label
-    qs_label = ttk.Label(
-        bq_root,
-        anchor="center",
-        wraplength=600,
-        padding=10
-    )
+    qs_label = ttk.Label(bq_root, anchor="center", wraplength=600, padding=10)
     qs_label.pack(pady=10)
 
     # Create the choice buttons
     choice_btns = []
     for i in range(4):
-        button = ttk.Button(
-            bq_root,
-            command=lambda i=i: check_answer(i)
-        )
+        button = ttk.Button(bq_root, command=lambda i=i: check_answer(i))
         button.pack(pady=5)
         choice_btns.append(button)
 
     # Create the feedback label
-    feedback_label = ttk.Label(
-        bq_root,
-        anchor="center",
-        padding=10
-    )
+    feedback_label = ttk.Label(bq_root, anchor="center", padding=10)
     feedback_label.pack(pady=10)
 
     # Create question number tracking label
-    question_label = ttk.Label(
-        bq_root,
-        text="Question: 1/{}".format(len(mquiz_data)),
-        anchor="center",
-        padding=10
-    )
+    question_label = ttk.Label(bq_root, text="Question: 1/{}".format(len(mquiz_data)), anchor="center", padding=10)
     question_label.pack(pady=10)
 
     # Create the next button
-    next_btn = ttk.Button(
-        bq_root,
-        text="Next",
-        command=next_question,
-        state="disabled"
-    )
+    next_btn = ttk.Button(bq_root, text="Next", command=next_question, state="disabled")
     next_btn.pack(pady=10)
 
     apply_theme()
@@ -669,48 +625,26 @@ def fish_quiz():
     fquiz_image.place(relheight=1, relwidth=1)
 
     # Create the question label
-    qs_label = ttk.Label(
-        fq_root,
-        anchor="center",
-        wraplength=500,
-        padding=10
-    )
+    qs_label = ttk.Label(fq_root, anchor="center", wraplength=500, padding=10)
     qs_label.pack(pady=10)
 
     # Create the choice buttons
     choice_btns = []
     for i in range(4):
-        button = ttk.Button(
-            fq_root,
-            command=lambda i=i: check_answer(i)
-        )
+        button = ttk.Button(fq_root, command=lambda i=i: check_answer(i))
         button.pack(pady=5)
         choice_btns.append(button)
 
     # Create the feedback label
-    feedback_label = ttk.Label(
-        fq_root,
-        anchor="center",
-        padding=10
-    )
+    feedback_label = ttk.Label(fq_root, anchor="center", padding=10)
     feedback_label.pack(pady=10)
 
     # Create question number tracking label
-    question_label = ttk.Label(
-        fq_root,
-        text="Question: 1/{}".format(len(mquiz_data)),
-        anchor="center",
-        padding=10
-    )
+    question_label = ttk.Label(fq_root, text="Question: 1/{}".format(len(mquiz_data)), anchor="center", padding=10)
     question_label.pack(pady=10)
 
     # Create the next button
-    next_btn = ttk.Button(
-        fq_root,
-        text="Next",
-        command=next_question,
-        state="disabled"
-    )
+    next_btn = ttk.Button(fq_root,text="Next", command=next_question, state="disabled")
     next_btn.pack(pady=10)
 
     apply_theme()
